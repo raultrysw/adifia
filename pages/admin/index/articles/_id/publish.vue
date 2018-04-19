@@ -1,6 +1,6 @@
 <template>
   <section>
-    <p><span v-if="published">¡Artículos enviado!</span><span v-else>Enviando...</span></p>
+    <p><span v-if="published">¡Artículos publicado!</span><span v-else>Publicando...</span></p>
   </section>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   created () {
     let url = this.uriToArticle
-    let data = {state: 1}
+    let data = {state: 2}
     let token = this.token
     this.makeRequest({url, data, token}, 'put',
       ({article}) => {

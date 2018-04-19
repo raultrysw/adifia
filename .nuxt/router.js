@@ -11,19 +11,20 @@ const _1c7dab7c = () => import('../pages/admin/index/photos/index.vue' /* webpac
 const _1fb83238 = () => import('../pages/admin/index/articles/index.vue' /* webpackChunkName: "pages/admin/index/articles/index" */).then(m => m.default || m)
 const _11f52614 = () => import('../pages/admin/index/events/index.vue' /* webpackChunkName: "pages/admin/index/events/index" */).then(m => m.default || m)
 const _0ad24058 = () => import('../pages/admin/index/members/index.vue' /* webpackChunkName: "pages/admin/index/members/index" */).then(m => m.default || m)
-const _e9a7cc40 = () => import('../pages/admin/index/articles/destroy.vue' /* webpackChunkName: "pages/admin/index/articles/destroy" */).then(m => m.default || m)
-const _5463e72a = () => import('../pages/admin/index/events/create.vue' /* webpackChunkName: "pages/admin/index/events/create" */).then(m => m.default || m)
-const _3c08f288 = () => import('../pages/admin/index/events/destroy.vue' /* webpackChunkName: "pages/admin/index/events/destroy" */).then(m => m.default || m)
-const _40dd1850 = () => import('../pages/admin/index/photos/edit.vue' /* webpackChunkName: "pages/admin/index/photos/edit" */).then(m => m.default || m)
-const _6c785224 = () => import('../pages/admin/index/photos/destroy.vue' /* webpackChunkName: "pages/admin/index/photos/destroy" */).then(m => m.default || m)
 const _27bfeab8 = () => import('../pages/admin/index/events/edit.vue' /* webpackChunkName: "pages/admin/index/events/edit" */).then(m => m.default || m)
+const _e9a7cc40 = () => import('../pages/admin/index/articles/destroy.vue' /* webpackChunkName: "pages/admin/index/articles/destroy" */).then(m => m.default || m)
+const _6c785224 = () => import('../pages/admin/index/photos/destroy.vue' /* webpackChunkName: "pages/admin/index/photos/destroy" */).then(m => m.default || m)
 const _ca27e27c = () => import('../pages/admin/index/photos/create.vue' /* webpackChunkName: "pages/admin/index/photos/create" */).then(m => m.default || m)
 const _7ff9656a = () => import('../pages/admin/index/members/create.vue' /* webpackChunkName: "pages/admin/index/members/create" */).then(m => m.default || m)
-const _59385ce4 = () => import('../pages/admin/index/photos/_id.vue' /* webpackChunkName: "pages/admin/index/photos/_id" */).then(m => m.default || m)
-const _aa04c508 = () => import('../pages/admin/index/events/_id.vue' /* webpackChunkName: "pages/admin/index/events/_id" */).then(m => m.default || m)
+const _5463e72a = () => import('../pages/admin/index/events/create.vue' /* webpackChunkName: "pages/admin/index/events/create" */).then(m => m.default || m)
+const _40dd1850 = () => import('../pages/admin/index/photos/edit.vue' /* webpackChunkName: "pages/admin/index/photos/edit" */).then(m => m.default || m)
+const _3c08f288 = () => import('../pages/admin/index/events/destroy.vue' /* webpackChunkName: "pages/admin/index/events/destroy" */).then(m => m.default || m)
 const _eed81e82 = () => import('../pages/admin/index/members/_id/index.vue' /* webpackChunkName: "pages/admin/index/members/_id/index" */).then(m => m.default || m)
 const _4fa16dac = () => import('../pages/admin/index/members/_id/index/destroy.vue' /* webpackChunkName: "pages/admin/index/members/_id/index/destroy" */).then(m => m.default || m)
+const _59385ce4 = () => import('../pages/admin/index/photos/_id.vue' /* webpackChunkName: "pages/admin/index/photos/_id" */).then(m => m.default || m)
+const _aa04c508 = () => import('../pages/admin/index/events/_id.vue' /* webpackChunkName: "pages/admin/index/events/_id" */).then(m => m.default || m)
 const _3c179ead = () => import('../pages/admin/index/members/_id/edit.vue' /* webpackChunkName: "pages/admin/index/members/_id/edit" */).then(m => m.default || m)
+const _223896c0 = () => import('../pages/admin/index/articles/_id/publish.vue' /* webpackChunkName: "pages/admin/index/articles/_id/publish" */).then(m => m.default || m)
 const _e64cd47c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
 const _71210ac4 = () => import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */).then(m => m.default || m)
 const _430f6669 = () => import('../pages/profile/articles/_id/publish.vue' /* webpackChunkName: "pages/profile/articles/_id/publish" */).then(m => m.default || m)
@@ -131,34 +132,19 @@ export function createRouter () {
 					name: "admin-index-members"
 				},
 				{
+					path: "events/edit",
+					component: _27bfeab8,
+					name: "admin-index-events-edit"
+				},
+				{
 					path: "articles/destroy",
 					component: _e9a7cc40,
 					name: "admin-index-articles-destroy"
 				},
 				{
-					path: "events/create",
-					component: _5463e72a,
-					name: "admin-index-events-create"
-				},
-				{
-					path: "events/destroy",
-					component: _3c08f288,
-					name: "admin-index-events-destroy"
-				},
-				{
-					path: "photos/edit",
-					component: _40dd1850,
-					name: "admin-index-photos-edit"
-				},
-				{
 					path: "photos/destroy",
 					component: _6c785224,
 					name: "admin-index-photos-destroy"
-				},
-				{
-					path: "events/edit",
-					component: _27bfeab8,
-					name: "admin-index-events-edit"
 				},
 				{
 					path: "photos/create",
@@ -171,14 +157,19 @@ export function createRouter () {
 					name: "admin-index-members-create"
 				},
 				{
-					path: "photos/:id?",
-					component: _59385ce4,
-					name: "admin-index-photos-id"
+					path: "events/create",
+					component: _5463e72a,
+					name: "admin-index-events-create"
 				},
 				{
-					path: "events/:id?",
-					component: _aa04c508,
-					name: "admin-index-events-id"
+					path: "photos/edit",
+					component: _40dd1850,
+					name: "admin-index-photos-edit"
+				},
+				{
+					path: "events/destroy",
+					component: _3c08f288,
+					name: "admin-index-events-destroy"
 				},
 				{
 					path: "members/:id?",
@@ -193,9 +184,24 @@ export function createRouter () {
 					]
 				},
 				{
+					path: "photos/:id?",
+					component: _59385ce4,
+					name: "admin-index-photos-id"
+				},
+				{
+					path: "events/:id?",
+					component: _aa04c508,
+					name: "admin-index-events-id"
+				},
+				{
 					path: "members/:id?/edit",
 					component: _3c179ead,
 					name: "admin-index-members-id-edit"
+				},
+				{
+					path: "articles/:id?/publish",
+					component: _223896c0,
+					name: "admin-index-articles-id-publish"
 				}
 			]
 		},

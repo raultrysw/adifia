@@ -11,6 +11,7 @@
           <nuxt-link :to="'/articles/' + article._id">View</nuxt-link> -
           <nuxt-link :to="'/articles/edit?id=' + article._id">Edit</nuxt-link>
           <nuxt-link :to="'/articles/destroy?id=' + article._id">Eliminar</nuxt-link>
+          <nuxt-link :to="'/admin/articles/' + article._id + '/publish'">Publicar</nuxt-link>
         </td>
       </tr>
     </table>
@@ -18,6 +19,7 @@
   </section>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -26,10 +28,14 @@ export default {
     }
   },
   created () {
-    this.getArticles({}, articles => {
+    this.getArticles({}, this.token, articles => {
+      debugger //eslint-disable-line
       this.articles = articles
       this.loaded = true
     })
+  },
+  computed: {
+    ...mapGetters(['token'])
   }
 }
 </script>
