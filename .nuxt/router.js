@@ -4,12 +4,15 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const _c579659a = () => import('../pages/signup.vue' /* webpackChunkName: "pages/signup" */).then(m => m.default || m)
+const _71210ac4 = () => import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */).then(m => m.default || m)
+const _430f6669 = () => import('../pages/profile/articles/_id/publish.vue' /* webpackChunkName: "pages/profile/articles/_id/publish" */).then(m => m.default || m)
 const _7639139e = () => import('../pages/login.vue' /* webpackChunkName: "pages/login" */).then(m => m.default || m)
 const _51af139b = () => import('../pages/articles/index.vue' /* webpackChunkName: "pages/articles/index" */).then(m => m.default || m)
 const _043e4ff2 = () => import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */).then(m => m.default || m)
 const _1c7dab7c = () => import('../pages/admin/index/photos/index.vue' /* webpackChunkName: "pages/admin/index/photos/index" */).then(m => m.default || m)
 const _1fb83238 = () => import('../pages/admin/index/articles/index.vue' /* webpackChunkName: "pages/admin/index/articles/index" */).then(m => m.default || m)
 const _11f52614 = () => import('../pages/admin/index/events/index.vue' /* webpackChunkName: "pages/admin/index/events/index" */).then(m => m.default || m)
+const _6e850cbf = () => import('../pages/admin/index/events/index/_id/publish.vue' /* webpackChunkName: "pages/admin/index/events/index/_id/publish" */).then(m => m.default || m)
 const _0ad24058 = () => import('../pages/admin/index/members/index.vue' /* webpackChunkName: "pages/admin/index/members/index" */).then(m => m.default || m)
 const _27bfeab8 = () => import('../pages/admin/index/events/edit.vue' /* webpackChunkName: "pages/admin/index/events/edit" */).then(m => m.default || m)
 const _e9a7cc40 = () => import('../pages/admin/index/articles/destroy.vue' /* webpackChunkName: "pages/admin/index/articles/destroy" */).then(m => m.default || m)
@@ -26,10 +29,10 @@ const _aa04c508 = () => import('../pages/admin/index/events/_id.vue' /* webpackC
 const _3c179ead = () => import('../pages/admin/index/members/_id/edit.vue' /* webpackChunkName: "pages/admin/index/members/_id/edit" */).then(m => m.default || m)
 const _223896c0 = () => import('../pages/admin/index/articles/_id/publish.vue' /* webpackChunkName: "pages/admin/index/articles/_id/publish" */).then(m => m.default || m)
 const _e64cd47c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
-const _71210ac4 = () => import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */).then(m => m.default || m)
-const _430f6669 = () => import('../pages/profile/articles/_id/publish.vue' /* webpackChunkName: "pages/profile/articles/_id/publish" */).then(m => m.default || m)
+const _69eb0437 = () => import('../pages/events/index.vue' /* webpackChunkName: "pages/events/index" */).then(m => m.default || m)
 const _0be7aa83 = () => import('../pages/articles/create.vue' /* webpackChunkName: "pages/articles/create" */).then(m => m.default || m)
 const _6d4ee906 = () => import('../pages/articles/_id/index.vue' /* webpackChunkName: "pages/articles/_id/index" */).then(m => m.default || m)
+const _dbeaaf42 = () => import('../pages/events/_id.vue' /* webpackChunkName: "pages/events/_id" */).then(m => m.default || m)
 const _f4edfcf4 = () => import('../pages/articles/_id/edit.vue' /* webpackChunkName: "pages/articles/_id/edit" */).then(m => m.default || m)
 const _a6dd1ef2 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
@@ -97,6 +100,18 @@ export function createRouter () {
 			name: "signup"
 		},
 		{
+			path: "/profile",
+			component: _71210ac4,
+			name: "profile",
+			children: [
+				{
+					path: "articles/:id?/publish",
+					component: _430f6669,
+					name: "profile-articles-id-publish"
+				}
+			]
+		},
+		{
 			path: "/login",
 			component: _7639139e,
 			name: "login"
@@ -124,7 +139,14 @@ export function createRouter () {
 				{
 					path: "events",
 					component: _11f52614,
-					name: "admin-index-events"
+					name: "admin-index-events",
+					children: [
+						{
+							path: ":id?/publish",
+							component: _6e850cbf,
+							name: "admin-index-events-index-id-publish"
+						}
+					]
 				},
 				{
 					path: "members",
@@ -211,16 +233,9 @@ export function createRouter () {
 			name: "about"
 		},
 		{
-			path: "/profile",
-			component: _71210ac4,
-			name: "profile",
-			children: [
-				{
-					path: "articles/:id?/publish",
-					component: _430f6669,
-					name: "profile-articles-id-publish"
-				}
-			]
+			path: "/events",
+			component: _69eb0437,
+			name: "events"
 		},
 		{
 			path: "/articles/create",
@@ -231,6 +246,11 @@ export function createRouter () {
 			path: "/articles/:id",
 			component: _6d4ee906,
 			name: "articles-id"
+		},
+		{
+			path: "/events/:id",
+			component: _dbeaaf42,
+			name: "events-id"
 		},
 		{
 			path: "/articles/:id/edit",

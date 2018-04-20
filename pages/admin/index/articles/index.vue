@@ -28,8 +28,7 @@ export default {
     }
   },
   created () {
-    this.getArticles({}, this.token, articles => {
-      debugger //eslint-disable-line
+    this.getArticles({moderating: true}, this.token, articles => {
       this.articles = articles
       this.loaded = true
     })

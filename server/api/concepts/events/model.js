@@ -1,31 +1,41 @@
 const mongoose = require('mongoose')
 
 let schema = new mongoose.Schema({
-  
-    title: {
 
-    },
-  
-    description: {
+  title: {
 
-    },
-  
-    location: {
+  },
 
-    },
-  
-    time: {
+  description: {
 
-    },
-  
-    date: {
+  },
 
-    },
-  
-    story: {
+  location: {
 
-    },
-  
+  },
+
+  time: {
+
+  },
+
+  date: {
+
+  },
+
+  story: {
+
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+
+  state: {
+    type: Number,
+    default: 0
+  }
+
 })
 
 class EventClass {}

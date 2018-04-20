@@ -5,6 +5,7 @@ import httpCodes from '../../../http-codes'
 export function retrieve (req, res, next) {
   const {createGoodResponse, createBadResponse} = req
   const query = filterFor(req)
+  console.log(query.exec)
   query.sort('-createdAt').exec((err, articles) => {
     if (err) {
       res.locals = createBadResponse(httpCodes.INTERNAL_ERROR, 'Hubo un error interno', {})

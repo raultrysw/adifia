@@ -1,12 +1,13 @@
 import event from '../model'
 import {pipe} from '../../../../../utils/pipe-objects'
-import {} from './filters'
+import {filterForPublished, sortByDateDesc} from './filters'
 
-function buildQuery ({isJustVocal, isAdmin, notPutEvents, user, requestAll}) {
-  let query = event.aggregate()
-  query.match({})
+function buildQuery ({filterPublished, sortByDate}) {
+  let query = event.find()
 
   let filters = [
+    [filterPublished, filterForPublished()],
+    [sortByDate, sortByDateDesc()]
   ]
 
   return pipe(query, function () {
@@ -16,7 +17,10 @@ function buildQuery ({isJustVocal, isAdmin, notPutEvents, user, requestAll}) {
 }
 
 export function filterFor ({query, params, user, loginLvl}) {
+  console.log(query)
   const state = {
+    filterPublished: query.published === 'true',
+    sortByDate: true
   }
 
   return buildQuery(state)

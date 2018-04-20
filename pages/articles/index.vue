@@ -19,7 +19,7 @@ export default {
   },
 
   created () {
-    let query = {state: 3}
+    let query = {state: 2}
     this.getArticles(query, null, articles => {
       this.articles = articles
       this.show = true

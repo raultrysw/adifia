@@ -22,6 +22,7 @@
     "enigma-code": "0.0.11",
     "express": "^4.15.3",
     "find-npm-prefix": "^1.0.2",
+    "google-maps-api": "^2.0.1",
     "json-parse-better-errors": "^1.0.2",
     "jwt-simple": "^0.5.1",
     "lazy-property": "^1.0.0",
