@@ -32,12 +32,7 @@ export default {
     }, 100)
   },
   computed: {
-    ...mapGetters(['isVocal', 'token']),
-    cachedArticle () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      return articles.newArticle
-    }
+    ...mapGetters(['isVocal', 'token'])
   },
   methods: {
     submitArticle () {
@@ -55,18 +50,6 @@ export default {
           console.log(error)
         }
       )
-    },
-    saveContent () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      articles.newArticle = this.article
-      localStorage.setItem('articles', JSON.stringify(articles))
-    },
-    dropContent () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      articles.newArticle = {}
-      localStorage.setItem('articles', JSON.stringify(articles))
     }
   }
 }

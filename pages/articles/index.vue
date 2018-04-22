@@ -10,20 +10,23 @@
   </section>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   data () {
     return {
-      show: false,
-      articles: []
+      show: false
     }
   },
+  asyncData (context) {
+    console.log(context)
 
-  created () {
-    let query = {state: 2}
-    this.getArticles(query, null, articles => {
-      this.articles = articles
-      this.show = true
-    })
+    // let query = {state: 2}
+    // this.getArticles(query, null, articles => {
+    //   this.show = true
+    // })
+  },
+  computed: {
+    ...mapState(['articles'])
   }
 }
 </script>

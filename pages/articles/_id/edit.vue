@@ -1,5 +1,5 @@
 <template>
-  <section @keydown="saveContent" v-if="loaded">
+  <section v-if="loaded">
     <h2>Editando {{$route.query.id}} <span v-if="loadedFromCache">(cargado desde cache)</span></h2>
     <my-form  :onSubmit="submitArticle" :errors="errors" text="Crear artículo"
         urlCb="/articles" textCb="volver atras">
@@ -10,7 +10,7 @@
 </template>
 <script>
 import Editor from '@tinymce/tinymce-vue'
-
+import {mapGetters} from 'vuex'
 export default {
   components: {Editor},
   data () {
@@ -23,31 +23,17 @@ export default {
       }
     }
   },
-  mounted () {
-    this.article = this.cachedArticle
-    debugger //eslint-disable-line
-    if (!this.article) {
-      this.makeRequest({url: this.articleUri}, 'get',
-        ({article}) => {
-          this.article = article
-          this.loaded = true
-        }, (error) => {
-          console.log(error)
-        }
-      )
-    } else {
-      this.loadedFromCache = true
-      this.loaded = true
-    }
+  created () {
+    setTimeout(() => {
+      this.getArticle(this.$route.params.id, this.token, ({article}) => {
+        console.log('articulo recuperado', article)
+      })
+    }, 200)
   },
   computed: {
+    ...mapGetters(['token']),
     articleUri () {
       return '/articles/' + this.$route.params.id
-    },
-    cachedArticle () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      return articles[this.$route.params.id]
     }
   },
   methods: {
@@ -59,18 +45,6 @@ export default {
           console.log(error)
         }
       )
-    },
-    saveContent () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      articles[this.$route.params.id] = this.article
-      localStorage.setItem('articles', JSON.stringify(articles))
-    },
-    dropContent () {
-      let articlesString = localStorage.getItem('articles') || '{}'
-      let articles = JSON.parse(articlesString)
-      articles[this.$route.params.id] = {}
-      localStorage.setItem('articles', JSON.stringify(articles))
     }
   }
 }

@@ -1516,7 +1516,8 @@ module.exports = {
     ]
   },
   plugins: [
-    '~/plugins/setup-vue'
+    '~/plugins/setup-vue',
+    { src: '~/plugins/persistence.js', ssr: false }
   ],
   /*
   ** Add axios globally

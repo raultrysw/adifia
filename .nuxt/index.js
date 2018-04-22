@@ -13,6 +13,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 import nuxt_plugin_setupvue_66bf4900 from 'nuxt_plugin_setupvue_66bf4900' // Source: ../plugins/setup-vue
+import nuxt_plugin_persistence_2f9253ee from 'nuxt_plugin_persistence_2f9253ee' // Source: ../plugins/persistence.js (ssr: false)
 
 
 // Component: <no-ssr>
@@ -153,6 +154,9 @@ async function createApp (ssrContext) {
   
   if (typeof nuxt_plugin_setupvue_66bf4900 === 'function') await nuxt_plugin_setupvue_66bf4900(app.context, inject)
   
+  if (process.browser) { 
+    if (typeof nuxt_plugin_persistence_2f9253ee === 'function') await nuxt_plugin_persistence_2f9253ee(app.context, inject)
+  }
 
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {

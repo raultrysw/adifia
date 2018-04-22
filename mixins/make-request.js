@@ -13,14 +13,14 @@ function makeRequest ({url, data, token}, method, cb, errorCb) {
       }
     }
   }
-  console.log('haciendo peticion a', url)
 
   axios[method](url, data, options).then(({data}) => {
-    console.log(data.message)
-    cb(data.items)
+    try {
+      cb(data.items)
+    } catch (error) {
+      console.log('un error fue disparado despues de la petición', error)
+    }
   }).catch(({response}) => {
-    debugger //eslint-disable-line
-    console.log('An error was dispatched', response)
     errorCb(response.data.items)
   })
 }

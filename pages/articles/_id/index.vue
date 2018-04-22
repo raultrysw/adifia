@@ -15,14 +15,9 @@ export default {
     }
   },
   created () {
-    this.makeRequest({url: this.articleUrl}, 'get',
-      ({article}) => {
-        this.article = article
-        this.loaded = true
-      }, (data) => {
-        console.log(data)
-      }
-    )
+    let article = this.$store.getters.getArticle(this.$route.params.id)
+    this.article = article
+    this.loaded = true
   },
   computed: {
     articleUrl () {

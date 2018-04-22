@@ -6,6 +6,7 @@
       <p>Escrito el {{article.createdAt | formatDate}}
         <span>
           <nuxt-link v-if="article.state === 0" :to="'/profile/articles/' + article._id + '/publish'">Enviar para moderar</nuxt-link>
+          <nuxt-link v-if="article.state === 0" :to="'/articles/' + article._id + '/edit'">Editar</nuxt-link>
           <span v-else-if="article.state === 1">Moderando</span>
           <span v-else>Publicado</span>
         </span>
