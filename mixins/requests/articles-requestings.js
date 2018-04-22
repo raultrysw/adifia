@@ -16,6 +16,12 @@ export function putArticle () {
   )
 }
 
+export function populateArticles () {
+  this.makeRequest({url: '/articles?state=2'}, 'get', ({articles}) => {
+    this.$store.commit('articlesRecovery', articles)
+  })
+}
+
 export function getMineArticle (id, successCb) {
   let url = `/articles/${id}?` + this.authQueried
   let article = this.$store.state[cacheKey].articles[id]

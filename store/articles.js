@@ -16,6 +16,10 @@ export const mutations = {
   },
   dropThisArticle (state, articleId) {
     delete state[cacheKey].articles[articleId || 'new']
+  },
+  articlesRecovery (state, articles) {
+    state.articles = articles
+    console.log('poniiendo articulos', articles, state.articles)
   }
 }
 export const getters = {

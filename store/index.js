@@ -11,6 +11,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       loggedIn: false,
+      articles: [],
       user: {},
       [key]: {
         token: null,

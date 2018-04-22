@@ -12,21 +12,14 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  data () {
-    return {
-      show: false
-    }
-  },
-  asyncData (context) {
-    console.log(context)
-
-    // let query = {state: 2}
-    // this.getArticles(query, null, articles => {
-    //   this.show = true
-    // })
+  created () {
+    if (!this.articles.length) this.populateArticles()
   },
   computed: {
-    ...mapState(['articles'])
+    ...mapState(['articles']),
+    show () {
+      return this.articles.length > 0
+    }
   }
 }
 </script>

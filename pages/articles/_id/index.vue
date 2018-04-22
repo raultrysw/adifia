@@ -1,5 +1,5 @@
 <template>
-  <section v-if="loaded">
+  <section v-if="show">
     <h1>{{article.title}}</h1>
     <div v-html="article.body"></div>
     <p>Escrito por {{article.author.name}} {{article.author.surname}}</p>
@@ -7,21 +7,19 @@
   </section>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
-  data () {
-    return {
-      loaded: false,
-      article: {}
-    }
-  },
   created () {
-    let article = this.$store.getters.getArticle(this.$route.params.id)
-    this.article = article
-    // this.loaded = true
+    if (!this.articles.length) this.populateArticles()
   },
   computed: {
-    articleUrl () {
-      return '/articles/' + this.$route.params.id
+    ...mapState(['articles']),
+    show () {
+      return this.articles.length > 0
+    },
+    article () {
+      const {id} = this.$route.params
+      return this.show && this.articles.find(article => article._id === id)
     }
   }
 }
