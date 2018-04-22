@@ -1,3 +1,5 @@
+import {key as cacheKey} from '~/plugins/persistence'
+
 const _ = require('lodash')
 export const state = {
   articles: []
@@ -6,8 +8,15 @@ export const state = {
 export const mutations = {
   articlesSubmit (state, articles) {
     state.articles = articles
+  },
+  articleToCache (state, article) {
+    console.log('salvando el artículo')
+    const key = article._id || 'new'
+    state[cacheKey].articles[key] = article
+  },
+  dropThisArticle (state, articleId) {
+    delete state[cacheKey].articles[articleId || 'new']
   }
-
 }
 export const getters = {
   getArticle: state => idArticle => {

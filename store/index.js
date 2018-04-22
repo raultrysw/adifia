@@ -13,7 +13,8 @@ const createStore = () => {
       loggedIn: false,
       user: {},
       [key]: {
-        token: null
+        token: null,
+        articles: {}
       },
       ...articlesStores.state
     },

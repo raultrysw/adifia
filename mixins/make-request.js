@@ -1,19 +1,9 @@
-import {PORT, HOST, userTokenKey} from '../settings'
+import {PORT, HOST} from '~/settings'
 
 import axios from 'axios'
 axios.defaults.baseURL = `http://${HOST}:${PORT}/api`
 
-function makeRequest ({url, data, token}, method, cb, errorCb) {
-  let options = {}
-  if (token) {
-    if (method === 'get') url += '&token' + '=' + token
-    else {
-      options.headers = {
-        [userTokenKey]: token
-      }
-    }
-  }
-
+function makeRequest ({url, data, options}, method, cb, errorCb) {
   axios[method](url, data, options).then(({data}) => {
     try {
       cb(data.items)

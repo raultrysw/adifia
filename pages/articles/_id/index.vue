@@ -17,7 +17,7 @@ export default {
   created () {
     let article = this.$store.getters.getArticle(this.$route.params.id)
     this.article = article
-    this.loaded = true
+    // this.loaded = true
   },
   computed: {
     articleUrl () {

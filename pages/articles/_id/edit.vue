@@ -1,10 +1,10 @@
 <template>
-  <section v-if="loaded">
+  <section @keydown="saveArticleInCache" v-if="loaded">
     <h2>Editando {{$route.query.id}} <span v-if="loadedFromCache">(cargado desde cache)</span></h2>
-    <my-form  :onSubmit="submitArticle" :errors="errors" text="Crear artículo"
+    <my-form  :onSubmit="putArticle" :errors="errors" text="Crear artículo"
         urlCb="/articles" textCb="volver atras">
       <my-input type="text" text="Escribe un título"   placeholder="Título del artículo" v-model="article.title" />
-      <editor @onKeyDown="saveContent" v-model="article.body"/>
+      <editor @onKeyDown="saveArticleInCache" v-model="article.body"/>
     </my-form>
   </section>
 </template>
@@ -15,6 +15,7 @@ export default {
   components: {Editor},
   data () {
     return {
+      errors: [],
       loaded: false,
       loadedFromCache: false,
       article: {
@@ -25,8 +26,10 @@ export default {
   },
   created () {
     setTimeout(() => {
-      this.getArticle(this.$route.params.id, this.token, ({article}) => {
-        console.log('articulo recuperado', article)
+      this.getMineArticle(this.$route.params.id, (loadedFromCache, article) => {
+        this.loaded = true
+        this.article = article
+        this.loadedFromCache = loadedFromCache
       })
     }, 200)
   },
@@ -34,17 +37,6 @@ export default {
     ...mapGetters(['token']),
     articleUri () {
       return '/articles/' + this.$route.params.id
-    }
-  },
-  methods: {
-    submitArticle () {
-      this.makeRequest({url: this.articleUri, data: this.article}, 'put',
-        ({article}) => {
-          this.$router.push('/articles/' + article._id)
-        }, (error) => {
-          console.log(error)
-        }
-      )
     }
   }
 }

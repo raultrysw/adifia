@@ -1,36 +1,28 @@
-let queryString = require('querystring')
+
+import {userTokenKey} from '~/settings'
+import {key as cacheKey} from '~/plugins/persistence'
+import {mapGetters} from 'vuex'
+
+import * as articleMethods from './requests/articles-requestings'
+let {stringify} = require('querystring')
+
 export default {
-  methods: {
-    getMembers (cb) {
-      const url = '/members'
-      this.makeRequest({url}, 'get', ({members}) => {
-        if (typeof cb === 'function') cb(members)
-      }, () => {
-
-      })
-    },
-    getArticles (query, token, cb) {
-      const url = '/articles?' + queryString.stringify(query)
-      console.log(url)
-      this.makeRequest({url, data: {}, token}, 'get', ({articles}) => {
-        this.$store.commit('articlesSubmit', articles)
-        if (typeof cb === 'function') cb(articles)
-      }, () => {
-
-      })
-    },
-    getArticle (id, token, cb) {
-      const url = '/articles/' + id + '/'
-      this.makeRequest({url, data: {}, token}, 'get', (response) => {
-        let article = response && response.article
-        console.log('cb', cb)
-        if (article && typeof cb === 'function') {
-          console.log('Invocando el callback')
-          cb(article)
+  computed: {
+    ...mapGetters(['token', 'isAdmin', 'isVocal']),
+    configAuthed () {
+      return {
+        headers: {
+          [userTokenKey]: this.$store.state[cacheKey].token
         }
-      }, () => {
-        console.log('error al recuperar el articulo', id, cb)
-      })
+      }
+    },
+    authQueried () {
+      let config = this.configAuthed
+      let authConfig = {token: config.headers[userTokenKey]}
+      return stringify(authConfig)
     }
+  },
+  methods: {
+    ...articleMethods
   }
 }
