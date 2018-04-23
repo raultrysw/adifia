@@ -10,6 +10,7 @@
   </section>
 </template>
 <script>
+import {populateArticles} from '~/api/articles.js'
 import {mapState} from 'vuex'
 export default {
   created () {
@@ -20,6 +21,7 @@ export default {
     show () {
       return this.articles.length > 0
     }
-  }
+  },
+  methods: {populateArticles}
 }
 </script>

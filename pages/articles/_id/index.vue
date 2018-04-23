@@ -7,6 +7,7 @@
   </section>
 </template>
 <script>
+import {populateArticles} from '~/api/articles.js'
 import {mapState} from 'vuex'
 export default {
   created () {
@@ -21,6 +22,7 @@ export default {
       const {id} = this.$route.params
       return this.show && this.articles.find(article => article._id === id)
     }
-  }
+  },
+  methods: {populateArticles}
 }
 </script>

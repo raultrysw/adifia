@@ -9,6 +9,7 @@
   </section>
 </template>
 <script>
+import {saveArticleInCache, putArticle, getMineArticle} from '~/api/articles.js'
 import Editor from '@tinymce/tinymce-vue'
 import {mapGetters} from 'vuex'
 export default {
@@ -38,6 +39,7 @@ export default {
     articleUri () {
       return '/articles/' + this.$route.params.id
     }
-  }
+  },
+  methods: {putArticle, saveArticleInCache, getMineArticle}
 }
 </script>
