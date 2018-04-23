@@ -1,6 +1,6 @@
 <template>
-  <section v-if="loaded">
-    <h2>Listado de miembros</h2>
+  <section v-if="show">
+    <h2>Listado de Artículos</h2>
     <table>
       <thead>
         <th>title</th><th>body</th><th>author</th>
@@ -19,22 +19,23 @@
   </section>
 </template>
 <script>
+import {getArticlesToModerate} from '~/api/articles'
 import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
-      articles: [],
-      loaded: false
+      articles: []
     }
   },
   created () {
-    this.getArticles({moderating: true}, this.token, articles => {
-      this.articles = articles
-      this.loaded = true
-    })
+    this.getArticlesToModerate()
   },
   computed: {
-    ...mapGetters(['token'])
-  }
+    ...mapGetters(['token']),
+    show () {
+      return this.articles.length > 0
+    }
+  },
+  methods: {getArticlesToModerate}
 }
 </script>

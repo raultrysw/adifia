@@ -81,3 +81,12 @@ export function getArticle (id) {
     console.log('hubo un error', errResponse)
   })
 }
+
+export function getArticlesToModerate () {
+  let url = '/articles/?moderating=true&' + this.authQueried
+  this.makeRequest({url}, 'get', ({articles}) => {
+    this.articles = articles
+  }, errorResponse => {
+    console.log(errorResponse)
+  })
+}
