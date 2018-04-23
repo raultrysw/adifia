@@ -12,7 +12,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "no-debugger": 1
+    "no-debugger": 1,
+    "one-var": 0
   },
   globals: {}
 }

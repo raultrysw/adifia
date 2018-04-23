@@ -4,6 +4,23 @@ export function saveArticleInCache () {
   this.$store.commit('articleToCache', this.article)
 }
 
+export function postArticle () {
+  let options = this.configAuthed
+  let url = '/articles'
+  let data = {article: this.article}
+
+  this.makeRequest({options, url, data}, 'post', ({articleCreated}) => {
+    this.$store.commit('dropThisArticle')
+    this.$router.push('/profile')
+  }, error => {
+    console.log('Hubo un error', error)
+  })
+}
+
+export function saveContent () {
+  this.$store.commit('articleToCache', this.article)
+}
+
 export function putArticle () {
   let config = this.configAuthed
   this.makeRequest({url: this.articleUri, data: this.article, config}, 'put',
