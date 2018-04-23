@@ -33,6 +33,17 @@ export function putArticle () {
   )
 }
 
+export function moderateArticle () {
+  let url = this.uriToArticle
+  let data = { state: 1 }
+  let token = this.token
+  this.makeRequest({ url, data, token }, 'put', ({ article }) => {
+    this.published = true
+  }, errorResponse => {
+    console.log(errorResponse)
+  })
+}
+
 export function populateArticles () {
   this.makeRequest({url: '/articles?state=2'}, 'get', ({articles}) => {
     this.$store.commit('articlesRecovery', articles)

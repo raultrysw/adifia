@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {moderateArticle} from '~/api/articles.js'
 export default {
   data () {
     return {
@@ -13,23 +13,13 @@ export default {
     }
   },
   created () {
-    let url = this.uriToArticle
-    let data = {state: 1}
-    let token = this.token
-    this.makeRequest({url, data, token}, 'put',
-      ({article}) => {
-        console.log('se ha publicado correctamente el artículo')
-        this.published = true
-      }, (errorResponse) => {
-        console.log(errorResponse)
-      }
-    )
+    this.moderateArticle()
   },
   computed: {
-    ...mapGetters(['token']),
     uriToArticle () {
       return '/articles/' + this.$route.params.id
     }
-  }
+  },
+  methods: {moderateArticle}
 }
 </script>
