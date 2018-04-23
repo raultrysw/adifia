@@ -8,33 +8,32 @@
   </section>
 </template>
 <script>
+import {mapState} from 'vuex'
+import {recoverAllEvents} from '~/api/events.js'
 import rswLocation from '~/components/rsw-location.vue'
 export default {
   components: {rswLocation},
-  data () {
-    return {
-      event: {},
-      loaded: false
-    }
-  },
   created () {
-    this.makeRequest({url: this.eventUrl}, 'get',
-      ({event}) => {
-        this.event = event
-        this.loaded = true
-      }, (data) => {
-        console.log('hubo un error', data)
-      }
-    )
+    if (this.events.length === 0) this.recoverAllEvents()
   },
   computed: {
+    ...mapState(['events']),
+    event () {
+      return this.events.length > 0 &&
+        this.events.find(event => event._id === this.$route.params.id)
+    },
+    loaded () {
+      return this.event !== false
+    },
     locationParsed () {
+      debugger //eslint-disable-line      
       const [lat, lng, text] = this.event.location.split(':')
       return {lng, lat, text}
     },
     eventUrl () {
       return '/events/' + this.$route.params.id
     }
-  }
+  },
+  methods: {recoverAllEvents}
 }
 </script>

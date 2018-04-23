@@ -1,8 +1,10 @@
 import Vuex from 'vuex'
 import {ROLS} from '~/settings'
 import {encode, decode} from '../utils/user-token'
-import * as articlesStores from './articles'
 import {key} from '~/plugins/persistence'
+
+import * as articlesStores from './articles'
+import * as eventsStores from './events'
 
 const VOCAL_LVL = ROLS.indexOf('Vocal')
 const ADMIN_LVL = ROLS.indexOf('Vocal') + 1
@@ -17,7 +19,8 @@ const createStore = () => {
         token: null,
         articles: {}
       },
-      ...articlesStores.state
+      ...articlesStores.state,
+      ...eventsStores.state
     },
     mutations: {
       logIn (state, user) {
@@ -33,7 +36,8 @@ const createStore = () => {
         state.user = {}
         state[key].token = null
       },
-      ...articlesStores.mutations
+      ...articlesStores.mutations,
+      ...eventsStores.mutations
     },
     getters: {
       isVocal (state) {
