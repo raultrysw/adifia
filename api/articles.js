@@ -26,7 +26,7 @@ export function putArticle () {
   this.makeRequest({url: this.articleUri, data: this.article, config}, 'put',
     ({article}) => {
       this.$store.commit('dropThisArticle', article._id)
-      this.$router.push('/articles/' + article._id)
+      this.$router.push('/profile')
     }, (error) => {
       console.log(error)
     }
@@ -50,6 +50,15 @@ export function getMineArticle (id, successCb) {
     successCb(false, article)
   }, (errResponse) => {
     console.log('hubo un error', errResponse)
+  })
+}
+
+export function getMineArticles () {
+  const url = '/articles?mine=true&' + this.authQueried
+  this.makeRequest({url}, 'get', ({articles}) => {
+    this.articles = articles
+  }, errorResponse => {
+    console.log('Ha ocurrido un error')
   })
 }
 

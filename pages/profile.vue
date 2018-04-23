@@ -16,6 +16,7 @@
   </section>
 </template>
 <script>
+import {getMineArticles} from '~/api/articles.js'
 import {mapGetters} from 'vuex'
 export default {
   data () {
@@ -24,17 +25,12 @@ export default {
     }
   },
   mounted () {
-    let query = {
-      mine: true
-    }
-    this.getArticles(query, this.token, (articles) => {
-      this.articles = articles
-      console.log('se recuperaron los articulos', articles)
-    })
+    this.getMineArticles()
   },
   computed: {
     ...mapGetters(['token'])
-  }
+  },
+  methods: {getMineArticles}
 }
 </script>
 
