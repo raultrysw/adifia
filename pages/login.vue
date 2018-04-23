@@ -5,7 +5,6 @@
   </section>
 </template>
 <script>
-import {mapState} from 'vuex'
 import loginForm from '~/components/form-login.vue'
 
 export default {
@@ -20,9 +19,6 @@ export default {
       if (this.loggedIn) this.$router.push('/')
       else this.show = true
     }, 100)
-  },
-  computed: {
-    ...mapState(['loggedIn'])
   }
 }
 </script>

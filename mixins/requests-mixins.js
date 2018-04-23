@@ -1,13 +1,14 @@
 
 import {userTokenKey} from '~/settings'
 import {key as cacheKey} from '~/plugins/persistence'
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 let {stringify} = require('querystring')
 
 export default {
   computed: {
     ...mapGetters(['token', 'isAdmin', 'isVocal']),
+    ...mapState(['loggedIn']),
     configAuthed () {
       return {
         headers: {

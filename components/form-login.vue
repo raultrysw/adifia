@@ -12,6 +12,7 @@
 </template>
 <script>
 import loginForm from '~/components/form-login.vue'
+import {signIn} from '~/api/members.js'
 
 export default {
   components: {loginForm},
@@ -24,27 +25,11 @@ export default {
       }
     }
   },
-  methods: {
-    logIn () {
-      this.makeRequest({url: '/members/login', data: this.user}, 'post',
-        ({user}) => {
-          this.errors = []
-          this.$store.commit('logIn', user)
-          this.$router.push('/')
-        },
-        ({response}) => {
-          this.errors = []
-          setTimeout(() => {
-            this.errors = response.data.items.errors
-          }, 75)
-        }
-      )
-    }
-  }
+  methods: {signIn}
 }
 /*
 USUARIO PRUEBA
-  email: rosa@gmail.com
+  email: raul@gmail.com
   password: root
 */
 </script>

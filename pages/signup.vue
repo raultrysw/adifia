@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Registrate en AdifiA</h2>
-    <my-form :errors="errors" @changedData="onChangedData"  :onSubmit="submitMember"
+    <my-form :errors="errors" :onSubmit="signUp"
         text="Registrate" urlCb="/" textCb="Volver atras">
       
       <my-input palceholder="Nombre" text="Tu nombre" v-model="member.name" />
@@ -13,6 +13,7 @@
   </section>
 </template>
 <script>
+import {signUp} from '~/api/members'
 export default {
   data () {
     return {
@@ -26,21 +27,7 @@ export default {
     }
   },
   methods: {
-    onChangedData () {},
-    submitMember () {
-      let url = '/members'
-      this.makeRequest({url, data: this.member}, 'post',
-        ({memberCreated}) => {
-          console.log('Se ha creado', memberCreated)
-          this.$router.push('/')
-        }, ({errors}) => {
-          this.errors = []
-          setTimeout(() => {
-            this.errors = errors
-          }, 100)
-        }
-      )
-    }
+    signUp
   }
 }
 </script>
