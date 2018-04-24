@@ -662,12 +662,14 @@ const updateAuth = (req, res, next) => next(undefined)
 /* harmony export (immutable) */ __webpack_exports__["a"] = logIn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_codes__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(45);
+
+
 
 
 
 function logIn (req, res, next) {
   const {createBadResponse} = req
-  console.log(req.body)
   __WEBPACK_IMPORTED_MODULE_0__model__["a" /* default */].findOne({email: req.body.email}, (err, user) => {
     if (err) {
       res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_1__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
@@ -677,6 +679,7 @@ function logIn (req, res, next) {
       res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_1__http_codes__["a" /* default */].NOT_FOUND, 'No se encontró el usuario', {errors: ['El email no existe']})
       return next(res.locals)
     }
+    console.log(user)
     req.locals = {hash: user.password, user}
     return next()
   })
@@ -799,6 +802,10 @@ const logIn = []
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return logIn; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http_codes__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prototypes_credentials__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(45);
+
+
+
 
 
 const bcrypt = __webpack_require__(7)
@@ -820,7 +827,8 @@ function comparePasswords (req, res, next) {
       return next(res.locals)
     }
     let credentials = new __WEBPACK_IMPORTED_MODULE_1__prototypes_credentials__["a" /* default */](user)
-    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_0__http_codes__["a" /* default */].OK, 'Te has logueado correctamente', {user: credentials})
+    let token = Object(__WEBPACK_IMPORTED_MODULE_2__utils_user_token__["a" /* encode */])(credentials)
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_0__http_codes__["a" /* default */].OK, 'Te has logueado correctamente', {user: credentials, token})
     return next()
   })
 }
@@ -1451,7 +1459,7 @@ function getMongoDocumentErrors (error) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_user_token__ = __webpack_require__(45);
 
 
-/* harmony default export */ __webpack_exports__["a"] = ([__WEBPACK_IMPORTED_MODULE_0__utils_user_token__["a" /* recoverUser */]]);
+/* harmony default export */ __webpack_exports__["a"] = ([__WEBPACK_IMPORTED_MODULE_0__utils_user_token__["b" /* recoverUser */]]);
 
 
 /***/ }),
@@ -1459,7 +1467,7 @@ function getMongoDocumentErrors (error) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = recoverUser;
+/* harmony export (immutable) */ __webpack_exports__["b"] = recoverUser;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__settings__ = __webpack_require__(5);
 
 const jwtSimple = __webpack_require__(46)
@@ -1468,7 +1476,7 @@ const decode = (token) => jwtSimple.decode(token, __WEBPACK_IMPORTED_MODULE_0__s
 /* unused harmony export decode */
 
 const encode = (objectUser) => jwtSimple.encode(objectUser, __WEBPACK_IMPORTED_MODULE_0__settings__["f" /* secret */])
-/* unused harmony export encode */
+/* harmony export (immutable) */ __webpack_exports__["a"] = encode;
 
 
 function recoverUser (req, res, next) {

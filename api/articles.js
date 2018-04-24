@@ -1,92 +1,139 @@
 import {key as cacheKey} from '~/plugins/persistence'
+import * as articleURLS from './url-builders/article'
 
-export function saveArticleInCache () {
-  this.$store.commit('articleToCache', this.article)
-}
+//
+// ─── RECUPERACION DE ARTICULOS CON GET ──────────────────────────────────────────
+//
 
-export function postArticle () {
-  let options = this.configAuthed
-  let url = '/articles'
-  let data = {article: this.article}
-
-  this.makeRequest({options, url, data}, 'post', ({articleCreated}) => {
-    this.$store.commit('dropThisArticle')
-    this.$router.push('/profile')
-  }, error => {
-    console.log('Hubo un error', error)
+export function populateArticles () {
+  let url = articleURLS.getLinkToPublishedArticles()
+  this.makeRequest({ url }, 'get', ({ articles }) => {
+    this.$store.commit('articlesRecovery', articles)
   })
 }
 
-export function saveContent () {
-  this.$store.commit('articleToCache', this.article)
-}
+export function getMineArticle (id, successCb) {
+  let article = this.$store.state[cacheKey].articles[id]
+  if (article) return successCb(true, article)
 
-export function putArticle () {
-  let config = this.configAuthed
-  this.makeRequest({url: this.articleUri, data: this.article, config}, 'put',
-    ({article}) => {
-      this.$store.commit('dropThisArticle', article._id)
-      this.$router.push('/profile')
-    }, (error) => {
-      console.log(error)
+  let url = articleURLS.getLinkToOwnArticle(id, this.token)
+
+  this.makeRequest(
+    { url },
+    'get',
+    ({ article }) => {
+      console.log('El articulo fue recuperado', article)
+      successCb(false, article)
+    },
+    errResponse => {
+      console.log('hubo un error', errResponse)
     }
   )
 }
 
+export function getMineArticles () {
+  const url = articleURLS.getLinkToOwnArticles(this.token)
+  this.makeRequest(
+    { url },
+    'get',
+    ({ articles }) => {
+      this.articles = articles
+    },
+    errorResponse => {
+      console.log('Ha ocurrido un error')
+    }
+  )
+}
+
+export function getArticlesToModerate () {
+  let url = articleURLS.getLinkToArticlesToModerate(this.token)
+  console.log(url)
+  this.makeRequest(
+    { url },
+    'get',
+    ({ articles }) => {
+      this.articles = articles
+    },
+    errorResponse => {
+      console.log(errorResponse)
+    }
+  )
+}
+
+//
+// ─── PETICIONES PARA HACER MODIFICACIONES EN ARTíCULOS ──────────────────────────
+//
+
+// Crear un artículos nuevo
+export function postArticle () {
+  let options = this.configAuthed
+  let url = articleURLS.getLinkToArticles()
+  let data = this.article
+
+  this.makeRequest({
+    options,
+    url,
+    data
+  },
+  'post',
+  ({
+    articleCreated
+  }) => {
+    this.$store.commit('dropThisArticle')
+    this.$router.push('/profile')
+  },
+  error => {
+    console.log('Hubo un error', error)
+  }
+  )
+}
+
+// Modificar un artículo
+export function putArticle () {
+  let config = this.configAuthed
+  this.makeRequest({
+    url: articleURLS.getLinkToArticle(this.$route.params.id),
+    data: this.article,
+    config
+  },
+  'put',
+  ({
+    article
+  }) => {
+    this.$store.commit('dropThisArticle', article._id)
+    this.$router.push('/profile')
+  },
+  error => {
+    console.log(error)
+  }
+  )
+}
+
+// Enviar para moderar un artículo
 export function moderateArticle () {
-  let url = this.uriToArticle
-  let data = { state: 1 }
+  let url = articleURLS.getLinkToArticle(this.$route.params.id)
+  let data = {
+    state: 1
+  }
   let token = this.token
-  this.makeRequest({ url, data, token }, 'put', ({ article }) => {
+  this.makeRequest({
+    url,
+    data,
+    token
+  }, 'put', ({
+    article
+  }) => {
     this.published = true
   }, errorResponse => {
     console.log(errorResponse)
   })
 }
 
-export function populateArticles () {
-  this.makeRequest({url: '/articles?state=2'}, 'get', ({articles}) => {
-    this.$store.commit('articlesRecovery', articles)
-  })
-}
+//
+// ─── OTROS MÉTODOS ──────────────────────────────────────────────────────────────
+//
 
-export function getMineArticle (id, successCb) {
-  let url = `/articles/${id}?` + this.authQueried
-  let article = this.$store.state[cacheKey].articles[id]
-
-  if (article) return successCb(true, article)
-
-  this.makeRequest({url}, 'get', ({article}) => {
-    console.log('El articulo fue recuperado', article)
-    successCb(false, article)
-  }, (errResponse) => {
-    console.log('hubo un error', errResponse)
-  })
-}
-
-export function getMineArticles () {
-  const url = '/articles?mine=true&' + this.authQueried
-  this.makeRequest({url}, 'get', ({articles}) => {
-    this.articles = articles
-  }, errorResponse => {
-    console.log('Ha ocurrido un error')
-  })
-}
-
-export function getArticle (id) {
-  let url = `/articles/${id}`
-  this.makeRequest({url}, 'get', ({article}) => {
-    console.log('El articulo fue recuperado', article)
-  }, (errResponse) => {
-    console.log('hubo un error', errResponse)
-  })
-}
-
-export function getArticlesToModerate () {
-  let url = '/articles/?moderating=true&' + this.authQueried
-  this.makeRequest({url}, 'get', ({articles}) => {
-    this.articles = articles
-  }, errorResponse => {
-    console.log(errorResponse)
-  })
+// Guardar artículo en cache
+export function saveArticleInCache () {
+  this.$store.commit('articleToCache', this.article)
 }

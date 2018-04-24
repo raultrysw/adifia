@@ -35,10 +35,7 @@ export default {
     }, 200)
   },
   computed: {
-    ...mapGetters(['token']),
-    articleUri () {
-      return '/articles/' + this.$route.params.id
-    }
+    ...mapGetters(['token'])
   },
   methods: {putArticle, saveArticleInCache, getMineArticle}
 }

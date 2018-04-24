@@ -1,5 +1,8 @@
 import httpCodes from '../../../../../http-codes'
 import Credentials from '../../../../../../prototypes/credentials'
+
+import {encode} from '../../../../../../utils/user-token'
+
 const bcrypt = require('bcrypt')
 
 function comparePasswords (req, res, next) {
@@ -19,7 +22,8 @@ function comparePasswords (req, res, next) {
       return next(res.locals)
     }
     let credentials = new Credentials(user)
-    res.locals = createGoodResponse(httpCodes.OK, 'Te has logueado correctamente', {user: credentials})
+    let token = encode(credentials)
+    res.locals = createGoodResponse(httpCodes.OK, 'Te has logueado correctamente', {user: credentials, token})
     return next()
   })
 }
