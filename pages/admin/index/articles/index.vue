@@ -10,7 +10,7 @@
         <td>
           <nuxt-link :to="'/articles/' + article._id">View</nuxt-link> -
           <nuxt-link :to="'/articles/edit?id=' + article._id">Edit</nuxt-link>
-          <nuxt-link :to="'/articles/destroy?id=' + article._id">Eliminar</nuxt-link>
+          <nuxt-link :to="'/admin/articles/destroy?id=' + article._id">Eliminar</nuxt-link>
           <nuxt-link :to="'/admin/articles/' + article._id + '/publish'">Publicar</nuxt-link>
         </td>
       </tr>

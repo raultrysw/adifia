@@ -108,6 +108,22 @@ export function putArticle () {
   )
 }
 
+// Publicar un artículo
+export function publishArticle () {
+  const {id} = this.$route.params
+
+  let url = articleURLS.getLinkToArticle(id)
+  let data = { state: 2 }
+  let token = this.token
+
+  this.makeRequest({ url, data, token }, 'put', ({ article }) => {
+    console.log('se ha publicado correctamente el artículo')
+    this.published = true
+  }, errorResponse => {
+    console.log(errorResponse)
+  })
+}
+
 // Enviar para moderar un artículo
 export function moderateArticle () {
   let url = articleURLS.getLinkToArticle(this.$route.params.id)
@@ -125,6 +141,17 @@ export function moderateArticle () {
     this.published = true
   }, errorResponse => {
     console.log(errorResponse)
+  })
+}
+
+// Eliminar un artículos
+export function deleteAnArticle () {
+  const {id} = this.$route.query
+  const url = articleURLS.getLinkToArticle(id)
+  this.makeRequest({ url }, 'delete', () => {
+    this.$router.push('/articles')
+  }, data => {
+    console.log(data)
   })
 }
 
