@@ -21,7 +21,6 @@ export const getLinkToOwnArticle = (id, token) => {
   let url = new URL('/articles/:id')
   url.setParam('id', id)
   url.setQuery('token', token)
-  console.log(url.href)
   return url.href
 }
 

@@ -15,7 +15,6 @@ export function recoverUser (req, res, next) {
         isPartner: req.user.pvLvl >= LEVELS.isPartner
       }
     } catch (error) {
-      console.log('El usuario no se pudo descifrar')
     } finally {
       next()
     }

@@ -22,7 +22,6 @@ export function getMineArticle (id, successCb) {
     { url },
     'get',
     ({ article }) => {
-      console.log('El articulo fue recuperado', article)
       successCb(false, article)
     },
     errResponse => {

@@ -1015,15 +1015,12 @@ function buildQuery ({putOwnArticles, id, putPublishedArticles, putArticlesToMod
 
 function filterFor ({query, params, user, loginLvl}) {
   const email = loginLvl && user.email
-  console.log('esta es la query', query)
   const state = {
     putOwnArticles: query.mine && email !== null,
     id: loginLvl && user._id,
     putPublishedArticles: query.state === '2',
     putArticlesToModerate: query.moderating === 'true'
   }
-
-  console.log('Este es el filtraao que se va a pasar', state)
 
   return buildQuery(state)
 }
@@ -1044,7 +1041,6 @@ function filterArticlesToModerate () {
   return query => query.where('state').equals('1')
 }
 function filterPublishedArticles () {
-  console.log('filtrando por articulos publicados')
   return query => query.where('state').equals('2')
 }
 
@@ -1490,7 +1486,6 @@ function recoverUser (req, res, next) {
         isPartner: req.user.pvLvl >= __WEBPACK_IMPORTED_MODULE_0__settings__["c" /* LEVELS */].isPartner
       }
     } catch (error) {
-      console.log('El usuario no se pudo descifrar')
     } finally {
       next()
     }
