@@ -18,13 +18,15 @@ const mutations = {
 
     let index = _.findIndex(state.members, {_id: id})
     state.members[index].pvLvl = rol
+  },
+  deleteMember (state, id) {
+    let index = _.findIndex(state.members, { _id: id })
+    state.members.splice(index, 1)
   }
 }
 
 const getters = {
   getMember: state => id => {
-    console.log('Recuperaando miembro con el id', id)
-
     return _.find(state.members, {_id: id})
   }
 }

@@ -42,8 +42,7 @@ export default {
     },
     destroyLink () {
       let destroyAddress = '/admin/members/' + this.member._id + '/destroy'
-      let confirmationText = '?confirmation=' + this.member.name + ' ' + this.member.surname
-      return destroyAddress + confirmationText
+      return destroyAddress
     },
     loaded () {
       return this.member !== undefined

@@ -49,6 +49,7 @@ export function get (req, res, next) {
 export function update (req, res, next) {
   const {createGoodResponse, createBadResponse} = req
   const $set = req.body
+  console.log($set)
   Member.findByIdAndUpdate(req.params.id, {$set}, (err, member) => {
     if (err) {
       res.locals = createBadResponse(httpCodes.INTERNAL_ERROR, 'Hubo un error interno', {})

@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Editando {{$route.query.id}}</h2>
-    <form @submit.prevent="submitMember">
+    <form @submit.prevent="putMember">
       <my-input placeholder="Escribe tu nombre" type="text" text="Nombre" v-model="member.name" />
       <my-input placeholder="Escribe tus apellidos" type="text" text="Apellidos" v-model="member.surname" />
       <my-input placeholder="Escribe tu correo electrónico" type="text" text="Correo electrónico" v-model="member.email" />
@@ -12,37 +12,27 @@
   </section>
 </template>
 <script>
+import {mapGetters, mapMutations} from 'vuex'
+import {putMember, recoverAllMembers} from '~/api/members'
+
 export default {
-  data () {
-    return {
-      member: {}
-    }
-  },
+  data: () => ({member: {}}),
   created () {
-    this.makeRequest({url: this.memberUri}, 'get',
-      ({member}) => {
-        this.member = member
-      }, (error) => {
-        console.log(error)
-      }
-    )
+    if (!Object.keys(this.member).length) {
+      this.recoverAllMembers(() => {
+        this.member = this.getMember()(this.$route.params.id)
+      })
+    }
   },
   computed: {
-    memberUri () {
-      return '/members/' + this.$route.params.id
+    loaded () {
+      return this.member !== undefined
     }
   },
-  methods: {
-    submitMember () {
-      this.makeRequest({url: this.memberUri, data: this.member}, 'put',
-        ({member}) => {
-          document.dispatchEvent(new Event('update-members'))
-          this.$router.push('/admin/members/' + member._id)
-        }, (error) => {
-          console.log(error)
-        }
-      )
-    }
+  methods: {recoverAllMembers,
+    putMember,
+    ...mapMutations('administration', ['submitMembers']),
+    ...mapGetters('administration', ['getMember'])
   }
 }
 </script>

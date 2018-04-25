@@ -588,6 +588,7 @@ function get (req, res, next) {
 function update (req, res, next) {
   const {createGoodResponse, createBadResponse} = req
   const $set = req.body
+  console.log($set)
   __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */].findByIdAndUpdate(req.params.id, {$set}, (err, member) => {
     if (err) {
       res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})

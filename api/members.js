@@ -1,10 +1,11 @@
 import * as membersURLS from './url-builders/members'
 
-export function recoverAllMembers () {
+export function recoverAllMembers (cb) {
   let url = membersURLS.membersURL()
   this.makeRequest({url}, 'get',
     ({members}) => {
       this.submitMembers(members)
+      if (typeof cb === 'function') cb()
     }, (errorResponse) => {
 
     }
@@ -37,6 +38,30 @@ export function putRolToMember (data, id) {
       this.pvLvl = data.pvLvl
     }, (errors) => {
       this.pvLvl = oldRol
+    }
+  )
+}
+
+export function putMember () {
+  let url = membersURLS.member(this.$route.params.id)
+  this.makeRequest({url, data: this.member}, 'put',
+    ({member}) => {
+      this.$router.push('/admin/members/' + member._id)
+    }, (error) => {
+      console.log(error)
+    }
+  )
+}
+
+export function deleteMember () {
+  if (this.anwser !== this.confirmation) return
+
+  this.makeRequest({url: membersURLS.member(this.$route.params.id)}, 'delete',
+    () => {
+      this.deleteMember(this.$route.params.id)
+      this.$router.push('/admin/members')
+    }, (data) => {
+      console.log(data)
     }
   )
 }
