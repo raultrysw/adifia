@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Creando un miembro</h2>
-    <my-form :errors="errors" @changedData="onChangedData"  :onSubmit="submitMember"
+    <my-form :errors="errors" :onSubmit="postMember"
         text="Registrate" urlCb="/" textCb="Volver atras">
       
       <my-input palceholder="Nombre" text="Tu nombre" v-model="member.name" />
@@ -13,8 +13,10 @@
   </section>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import {mapMutations} from 'vuex'
 import RolsComponent from '~/components/rols'
+import {postMember} from '~/api/members'
+
 export default {
   components: {RolsComponent},
   data () {
@@ -29,25 +31,6 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapGetters(['token'])
-  },
-  methods: {
-    submitMember () {
-      let url = '/members'
-      const {token} = this
-      this.makeRequest({url, data: this.member, token}, 'post',
-        ({memberCreated}) => {
-          console.log('Se ha creado', memberCreated)
-          this.$router.push('/admin/members/' + memberCreated._id)
-        }, ({errors}) => {
-          this.errors = []
-          setTimeout(() => {
-            this.errors = errors
-          }, 100)
-        }
-      )
-    }
-  }
+  methods: {...mapMutations('administration', ['addMember']), postMember}
 }
 </script>

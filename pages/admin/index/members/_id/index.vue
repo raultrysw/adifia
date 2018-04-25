@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <section v-if="loaded">
     <p>name {{member.name}}</p>
     <p>surname {{member.surname}}</p>
     <p>email {{member.email}}</p>
-    <rols-component :active="pvLvl" v-model="pvLvl" />
+    <rols-component @change="changeRol" :active="pvLvl" v-model="pvLvl" />
     <p><nuxt-link to="/admin/members">Volver atras</nuxt-link></p>
     <div>
       <nuxt-link :to="editLink">Editar</nuxt-link>
@@ -15,63 +15,52 @@
   </section>
 </template>
 <script>
+import {mapGetters, mapMutations} from 'vuex'
 import RolsComponent from '~/components/rols'
+import {putRolToMember, recoverAllMembers} from '~/api/members'
+
+function changeRol (target) {
+  let data = {pvLvl: target.value}
+  const {id} = this.$route.params
+  this.putRolToMember(data, id)
+}
+
 export default {
   components: {RolsComponent},
-  data () {
-    return {
-      member: {},
-      pvLvl: null
-    }
+  methods: {putRolToMember,
+    changeRol,
+    recoverAllMembers,
+    ...mapMutations('administration', ['submitMembers', 'restoreRol', 'switchRol']),
+    ...mapGetters('administration', ['getMember'])
   },
   created () {
-    this.recoverMember()
-  },
-  beforeRouteUpdate (to, from, next) {
-    const {id} = to.params
-    this.$route.params.id = id
-    this.recoverMember()
-    next()
-  },
-  methods: {
-    recoverMember () {
-      this.makeRequest({url: this.memberUrl}, 'get',
-        ({member}) => {
-          this.member = member
-          this.pvLvl = member.pvLvl
-        }, (data) => {
-          console.log(data)
-        }
-      )
-    }
-  },
-  watch: {
-    pvLvl (oldValue, newValue) {
-      const data = {
-        pvLvl: this.pvLvl
-      }
-      this.makeRequest({url: this.memberUrl, data, auth: true}, 'put',
-        ({member}) => {
-          this.member.pvLvl = data.pvLvl
-        }, (errors) => {
-          debugger //eslint-disable-line
-          this.pvLvl = this.member.pvLvl
-        }
-      )
-    }
+    if (!this.member) this.recoverAllMembers()
   },
   computed: {
-    memberUrl () {
-      return '/members/' + this.$route.params.id
-    },
     editLink () {
       return '/admin/members/' + this.member._id + '/edit'
-      // return '/admin/members/edit?id=' + this.member._id
     },
     destroyLink () {
       let destroyAddress = '/admin/members/' + this.member._id + '/destroy'
       let confirmationText = '?confirmation=' + this.member.name + ' ' + this.member.surname
       return destroyAddress + confirmationText
+    },
+    loaded () {
+      return this.member !== undefined
+    },
+    member () {
+      return this.getMember()(this.$route.params.id)
+    },
+    pvLvl: {
+      get () {
+        return this.member.pvLvl
+      },
+      set (rol) {
+        console.log('Cambiaando rol a', rol)
+
+        const {id} = this.$route.params
+        this.switchRol({id, rol})
+      }
     }
   }
 }

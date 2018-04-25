@@ -6,11 +6,14 @@ import {key} from '~/plugins/persistence'
 import * as articlesStores from './articles'
 import * as eventsStores from './events'
 
+import administration from './administration'
+
 const VOCAL_LVL = ROLS.indexOf('Vocal')
 const ADMIN_LVL = ROLS.indexOf('Vocal') + 1
 
 const createStore = () => {
   return new Vuex.Store({
+    modules: {administration},
     state: {
       loggedIn: false,
       articles: [],

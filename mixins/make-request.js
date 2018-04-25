@@ -8,7 +8,7 @@ function makeRequest ({url, data, options}, method, cb, errorCb) {
     try {
       cb(data.items)
     } catch (error) {
-      console.log('un error fue disparado despues de la petición', error)
+      console.error('un error fue disparado despues de la petición', error)
     }
   }).catch(({response}) => {
     errorCb(response.data.items)

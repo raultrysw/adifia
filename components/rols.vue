@@ -17,6 +17,7 @@ export default {
   },
   methods: {
     emitValue ({target}) {
+      this.$emit('change', target)
       this.$emit('input', target.value)
     }
   }
