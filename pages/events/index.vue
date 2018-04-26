@@ -13,10 +13,10 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import {recoverAllEvents} from '~/api/events'
+import {recoverEvents} from '~/api/events'
 export default {
   created () {
-    this.recoverAllEvents()
+    this.recoverEvents()
   },
   computed: {
     ...mapState(['events']),
@@ -24,6 +24,6 @@ export default {
       return this.events.length > 0
     }
   },
-  methods: {recoverAllEvents}
+  methods: {recoverEvents}
 }
 </script>

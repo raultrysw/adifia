@@ -9,21 +9,21 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-import {recoverAllEvents} from '~/api/events.js'
+import {recoverEvents} from '~/api/events.js'
 import rswLocation from '~/components/rsw-location.vue'
 export default {
   components: {rswLocation},
   created () {
-    if (this.events.length === 0) this.recoverAllEvents()
+    if (this.events.length === 0) this.recoverEvents()
   },
   computed: {
     ...mapState(['events']),
     event () {
-      return this.events.length > 0 &&
+      return this.loaded &&
         this.events.find(event => event._id === this.$route.params.id)
     },
     loaded () {
-      return this.event !== false
+      return this.events.length > 0
     },
     locationParsed () {
       debugger //eslint-disable-line      
@@ -34,6 +34,6 @@ export default {
       return '/events/' + this.$route.params.id
     }
   },
-  methods: {recoverAllEvents}
+  methods: {recoverEvents}
 }
 </script>

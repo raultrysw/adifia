@@ -8,9 +8,9 @@
       <tr v-for="(event, index) in events" :key="index">
         <td>{{event.title}}</td><td>{{event.description}}</td><td>{{event.location}}</td><td>{{event.time}}</td><td>{{event.date}}</td><td>{{event.story}}</td>
         <td>
-          <nuxt-link :to="'/events/' + event._id">View</nuxt-link> -
-          <nuxt-link :to="'/events/edit?id=' + event._id">Edit</nuxt-link>
-          <nuxt-link :to="'/events/destroy?id=' + event._id">Eliminar</nuxt-link>
+          <nuxt-link :to="'/admin/events/' + event._id">View</nuxt-link> -
+          <nuxt-link :to="'/admin/events/edit?id=' + event._id">Edit</nuxt-link>
+          <nuxt-link :to="'/admin/events/destroy?id=' + event._id">Eliminar</nuxt-link>
           <nuxt-link v-if="Number(event.state) < 1" :to="'/admin/events/' + event._id + '/publish'">publicar</nuxt-link>
         </td>
       </tr>
@@ -20,21 +20,17 @@
   </section>
 </template>
 <script>
-export default {
-  data () {
-    return {
-      events: [],
-      loaded: false
-    }
-  },
-  created () {
-    const url = '/events'
-    this.makeRequest({url}, 'get', ({events}) => {
-      this.events = events
-      this.loaded = true
-    }, () => {
+import {mapMutations, mapState} from 'vuex'
+import {recoverAllEvents} from '~/api/events'
 
-    })
-  }
+export default {
+  created () {
+    this.recoverAllEvents()
+  },
+  computed: {
+    ...mapState('administration', ['events']),
+    loaded () { return this.events.length > 0 }
+  },
+  methods: {recoverAllEvents, ...mapMutations('administration', ['submitAllEvents'])}
 }
 </script>

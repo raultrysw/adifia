@@ -6,7 +6,7 @@ import {key} from '~/plugins/persistence'
 import * as articlesStores from './articles'
 import * as eventsStores from './events'
 
-import administration from './administration'
+import administration from './administration/index.js'
 
 const VOCAL_LVL = ROLS.indexOf('Vocal')
 const ADMIN_LVL = ROLS.indexOf('Vocal') + 1
@@ -17,6 +17,7 @@ const createStore = () => {
     state: {
       loggedIn: false,
       articles: [],
+      events: [],
       user: {},
       [key]: {
         token: null,

@@ -1,30 +1,21 @@
 <template>
-  <section>
-    <h3 v-if="published">Publicado</h3>
+  <section v-if="published">
+    <h1>El evento fue publicado</h1>
+    <p><nuxt-link to="/admin/events">Volver atras</nuxt-link></p>
   </section>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
+import {makeEventPublished} from '~/api/events'
+
 export default {
-  data () {
-    return {
-      published: false
-    }
-  },
+  data () { return {published: true} },
   created () {
-    const {url, token} = this
-    let data = {state: 1}
-    this.makeRequest({url, data, token}, 'put',
-      () => { this.published = true },
-      () => console.log('hubo un errror')
-    )
+    this.makeEventPublished()
   },
   computed: {
-    ...mapGetters(['token']),
-    url () {
-      const {id} = this.$route.params
-      return '/events/' + id
-    }
-  }
+    ...mapState('administration', ['events'])
+  },
+  methods: {makeEventPublished, ...mapMutations('administration', ['publishEvent'])}
 }
 </script>

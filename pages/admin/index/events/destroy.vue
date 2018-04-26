@@ -3,20 +3,13 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
+import {deleteEvent} from '~/api/events'
+
 export default {
   created () {
-    this.makeRequest({url: this.eventUrl}, 'delete',
-      () => {
-        this.$router.push('/events')
-      }, (data) => {
-        console.log(data)
-      }
-    )
+    this.deleteEvent()
   },
-  computed: {
-    eventUrl () {
-      return '/events/' + this.$route.query.id
-    }
-  }
+  methods: {deleteEvent, ...mapMutations('administration', ['removeEvent'])}
 }
 </script>
