@@ -8,7 +8,7 @@
 export default {
   head () {
     return {
-      title: 'Users'
+      title: 'Página principal'
     }
   }
 }

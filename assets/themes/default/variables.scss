@@ -1,0 +1,11 @@
+$header-height: 50px;
+$aside-width: 300px;
+
+$main-margin: 10px;
+
+$left-position-header: $aside-width;
+
+$main-position: (
+  top: calc(#{$header-height} + #{$main-margin}),
+  left: calc(#{$aside-width} + #{$main-margin})
+)

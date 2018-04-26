@@ -15,6 +15,7 @@ const createStore = () => {
   return new Vuex.Store({
     modules: {administration},
     state: {
+      currentTitle: '',
       loggedIn: false,
       articles: [],
       events: [],
@@ -27,6 +28,7 @@ const createStore = () => {
       ...eventsStores.state
     },
     mutations: {
+      setTitle (state, title) { state.currentTitle = title },
       logIn (state, user) {
         const token = encode(user)
         state.user = user

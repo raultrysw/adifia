@@ -22,6 +22,9 @@ export default {
       return this.articles.length > 0
     }
   },
+  head: {
+    title: 'Blog de adifia'
+  },
   methods: {populateArticles}
 }
 </script>

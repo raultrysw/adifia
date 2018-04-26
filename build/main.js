@@ -1519,6 +1519,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  css: [
+    '@/assets/main.scss'
+  ],
   plugins: [
     '~/plugins/setup-vue',
     { src: '~/plugins/persistence.js', ssr: false }
