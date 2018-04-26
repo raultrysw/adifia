@@ -13,6 +13,7 @@
 import {populateArticles} from '~/api/articles.js'
 import {mapState} from 'vuex'
 export default {
+  data () { return {title: 'Blog'} },
   created () {
     if (!this.articles.length) this.populateArticles()
   },
@@ -21,9 +22,6 @@ export default {
     show () {
       return this.articles.length > 0
     }
-  },
-  head: {
-    title: 'Blog de adifia'
   },
   methods: {populateArticles}
 }

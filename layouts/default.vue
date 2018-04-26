@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <header class="app__header">
-      <h2>{{title}}</h2>
+      <h2>{{currentTitle}}</h2>
     </header>
     <aside class="app__aside">
       <h1 class="app__title-web"><nuxt-link to="/">AdifiA</nuxt-link></h1>

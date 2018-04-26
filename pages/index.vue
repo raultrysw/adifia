@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  head () {
-    return {
-      title: 'Página principal'
-    }
-  }
+  data () { return {title: 'Página principal'} }
 }
 </script>
 
