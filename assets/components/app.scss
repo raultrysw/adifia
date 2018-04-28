@@ -16,18 +16,24 @@
     @extend .cross-center;
   }
   &__aside {
+    @extend .flex-column;
     position: fixed;
     top: 0px;
     bottom: 0px;
     width: $aside-width;
     background: white;
     border-right: 1px solid;
+    padding: 0em .2em;
   }
   &__main {
     position: fixed;
     top: map-get($map: $main-position, $key: top);
     left: map-get($map: $main-position, $key: left);
-    right: 0px;
-    background: tomato;
+    right: 16px;
+  }
+  &__title {
+    &-web {
+      text-align: center;
+    }
   }
 }

@@ -1,0 +1,11 @@
+@import './default/variables.scss';
+
+*:not(ul):not(ol) {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}

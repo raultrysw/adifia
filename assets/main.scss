@@ -1,15 +1,28 @@
-@import './themes/default/variables.scss';
+@import './themes/index.scss';
 @import './components/app.scss';
-
-*:not(ul):not(ol) {
-  margin: 0px;
-  padding: 0px;
-}
 
 .flex-horizontal {
   display: flex;
   justify-content: space-between;
   &.cross-center {
     align-items: center;
+  }
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.no-list {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  margin: .5em 0em;
+  & a {
+    padding: .4em;
+    display: inline-block;
   }
 }
