@@ -1,11 +1,13 @@
 <template>
   <section class="container">
-    <h1>Pagina principal</h1>
+    <adifia-slider />
   </section>
 </template>
 
 <script>
+import AdifiaSlider from '~/components/adifia-slider.vue'
 export default {
+  components: {AdifiaSlider},
   data () { return {title: 'Página principal'} }
 }
 </script>

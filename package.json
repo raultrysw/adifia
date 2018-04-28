@@ -20,6 +20,7 @@
     "config-chain": "^1.1.11",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.11",
+    "ed-grid": "^2.1.7",
     "enigma-code": "0.0.11",
     "express": "^4.15.3",
     "find-npm-prefix": "^1.0.2",

@@ -1,14 +1,8 @@
 <template>
-  <form @submit.prevent="logIn">
-      <ul v-if="errors">
-        <li v-for="(error, index) in errors" :key="index">{{error}}</li>
-      </ul>
-      <my-input v-model="user.email" placeholder="Correo electrónico" text="Correo electrónico" />
-      <my-input v-model="user.password" placeholder="Contraseña" type="password" text="Contraseña" />
-      <div>
-        <p><input type="submit" value="Entrar" /></p> 
-      </div>
-    </form>
+  <my-form :errors="errors" :onSubmit="signIn" text="Entra a adifia" urlCb="/signup" textCb="Registrarse ">
+    <my-input v-model="user.email" placeholder="Correo electrónico" text="Correo electrónico" />
+    <my-input v-model="user.password" placeholder="Contraseña" type="password" text="Contraseña" />
+  </my-form>
 </template>
 <script>
 import loginForm from '~/components/form-login.vue'

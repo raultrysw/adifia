@@ -14,22 +14,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.input-control {
-  border: 1px;
-  padding: .5em;
-  margin: 1em;
-  &__text, &__box {
-    display: block;
-    font-size: 1.2em;
-  }
-  &__text {
-    font-size: 1.5em;
-  }
-  &__box {
-    width: 100%;
-    padding: .3em;
-    box-sizing: border-box;
-  }
-}
-</style>

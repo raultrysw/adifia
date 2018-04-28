@@ -11,8 +11,15 @@ import administration from './administration/index.js'
 const VOCAL_LVL = ROLS.indexOf('Vocal')
 const ADMIN_LVL = ROLS.indexOf('Vocal') + 1
 
+let widths = {
+  s: 320,
+  m: 640,
+  l: 1024,
+  xl: 1440
+}
+
 const createStore = () => {
-  return new Vuex.Store({
+  let store = new Vuex.Store({
     modules: {administration},
     state: {
       currentTitle: '',
@@ -20,6 +27,7 @@ const createStore = () => {
       articles: [],
       events: [],
       user: {},
+      widths,
       [key]: {
         token: null,
         articles: {}
@@ -41,6 +49,10 @@ const createStore = () => {
         state.loggedIn = false
         state.user = {}
         state[key].token = null
+      },
+      updateBounds (state) {
+        const innerWidth = window.innerWidth
+        state.widthW = innerWidth
       },
       ...articlesStores.mutations,
       ...eventsStores.mutations
@@ -67,6 +79,14 @@ const createStore = () => {
       }
     }
   })
+
+  if (process.browser) {
+    window.onload = () => store.commit('updateBounds')
+    window.onresize = () => {
+      store.commit('updateBounds')
+    }
+  }
+  return store
 }
 
 export default createStore

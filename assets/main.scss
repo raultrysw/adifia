@@ -1,3 +1,4 @@
+@import '../node_modules/ed-grid/ed-grid.scss';
 @import './themes/index.scss';
 @import './components/app.scss';
 
@@ -6,6 +7,12 @@
   justify-content: space-between;
   &.cross-center {
     align-items: center;
+  }
+  &.form {
+    & > * {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
@@ -24,5 +31,24 @@
   & a {
     padding: .4em;
     display: inline-block;
+  }
+}
+
+.input-control {
+  border: 1px;
+  padding: .2em;
+  display: block;
+  &__text,
+  &__box {
+    display: block;
+    font-size: 1.2em;
+  }
+  &__text {
+    font-size: 1.5em;
+  }
+  &__box {
+    width: 100%;
+    padding: .3em;
+    box-sizing: border-box;
   }
 }

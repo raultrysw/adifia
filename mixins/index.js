@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axiosMixin from './make-request'
+import mq from './mq'
 import requestsMixins from './requests-mixins'
 
 import {mapState, mapMutations} from 'vuex'
@@ -25,6 +26,6 @@ const globalMixin = {
   }
 }
 
-const mixins = [axiosMixin, requestsMixins, globalMixin]
+const mixins = [axiosMixin, requestsMixins, globalMixin, mq]
 
 mixins.forEach(mixin => Vue.mixin(mixin))
