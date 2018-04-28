@@ -1,6 +1,6 @@
 <template>
   <section @keydown="saveArticleInCache" v-if="loaded">
-    <h2>Editando {{$route.query.id}} <span v-if="loadedFromCache">(cargado desde cache)</span></h2>
+    <p><strong v-if="loadedFromCache">Cargado desde cache</strong></p>
     <my-form  :onSubmit="putArticle" :errors="errors" text="Actualizar artículo"
         urlCb="/articles" textCb="volver atras">
       <my-input type="text" text="Escribe un título"   placeholder="Título del artículo" v-model="article.title" />
@@ -19,7 +19,9 @@ export default {
       errors: [],
       loaded: false,
       loadedFromCache: false,
+      title: 'Edición de artículo',
       article: {
+        id: '',
         title: '',
         body: ''
       }
@@ -29,6 +31,7 @@ export default {
     setTimeout(() => {
       this.getMineArticle(this.$route.params.id, (loadedFromCache, article) => {
         this.loaded = true
+        this.article.id = article._id
         this.article = article
         this.loadedFromCache = loadedFromCache
       })

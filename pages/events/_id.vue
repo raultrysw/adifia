@@ -22,6 +22,9 @@ export default {
       return this.loaded &&
         this.events.find(event => event._id === this.$route.params.id)
     },
+    title () {
+      return this.event.title
+    },
     loaded () {
       return this.events.length > 0
     },

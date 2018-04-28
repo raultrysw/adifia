@@ -1,8 +1,7 @@
 <template>
   <section>
-    <h1>Area privada</h1>
     <div v-for="(article, index) in articles" :key="index">
-      <h2>{{article.title}} ({{article.state}})</h2>
+      <h3>{{article.title}} ({{article.state}})</h3>
       <p>Escrito el {{article.createdAt | formatDate}}
         <span>
           <nuxt-link v-if="article.state === 0" :to="'/profile/articles/' + article._id + '/publish'">Enviar para moderar</nuxt-link>
@@ -21,6 +20,7 @@ import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
+      title: 'Área privada',
       articles: []
     }
   },

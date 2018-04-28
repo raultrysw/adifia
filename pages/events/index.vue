@@ -1,6 +1,5 @@
 <template>
   <section v-if="loaded">
-    <h2>Listado de eventos</h2>
     <div>
       <div v-for="(event, index) in events" :key="index">
         <h1>{{event.title}} ({{event.date}} - {{event.time}})</h1>
@@ -15,6 +14,7 @@
 import {mapState} from 'vuex'
 import {recoverEvents} from '~/api/events'
 export default {
+  data () { return {title: 'Lista de eventos'} },
   created () {
     this.recoverEvents()
   },

@@ -1,9 +1,8 @@
 <template>
   <section v-if="show">
-    <h2>Acerca de adifia</h2>
-    <h3>Adifia cuenta con {{partnersCount}} socios</h3>
+    <h2>Adifia cuenta con {{partnersCount}} socios</h2>
     <section>
-      <h4>Estos son los administradores de adifia</h4>
+      <h3>Estos son los administradores de adifia</h3>
       <ul v-for="(admin, index) in administrators" :key="index">
         <li>{{admin.name}} {{admin.surname}}</li>
       </ul>
@@ -16,7 +15,8 @@ export default {
     return {
       partnersCount: -1,
       administrators: [],
-      show: false
+      show: false,
+      title: 'Acerca de adifia'
     }
   },
   mounted () {

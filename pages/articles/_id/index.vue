@@ -18,6 +18,9 @@ export default {
     show () {
       return this.articles.length > 0
     },
+    title () {
+      return this.article.title
+    },
     article () {
       const {id} = this.$route.params
       return this.show && this.articles.find(article => article._id === id)

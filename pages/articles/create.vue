@@ -1,6 +1,5 @@
 <template>
   <section @keydown="saveArticleInCache">
-    <h2>Creando un articulo</h2>
     <my-form  :onSubmit="postArticle" :errors="errors" text="Crear artículo"
         urlCb="/articles" textCb="volver atras">
       <my-input type="text" text="Escribe un título"   placeholder="Título del artículo" v-model="article.title" />
@@ -18,6 +17,7 @@ export default {
   components: {Editor},
   data () {
     return {
+      title: 'Creación de un artículo',
       errors: [],
       article: {
         title: '',

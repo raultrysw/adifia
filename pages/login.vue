@@ -1,6 +1,5 @@
 <template>
   <section v-if="show">
-    <h2>Entra en AdifiA</h2>
     <login-form />
   </section>
 </template>
@@ -11,7 +10,8 @@ export default {
   components: {loginForm},
   data () {
     return {
-      show: false
+      show: false,
+      title: 'Entra a AdifiA'
     }
   },
   created () {
