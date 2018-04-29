@@ -16,12 +16,16 @@ export function retrieve (req, res, next) {
 }
 
 export function create (req, res, next) {
+  console.log(req.file, req.body)
   const {createGoodResponse, createBadResponse} = req
   let photo = new Photo(req.body)
   photo.save((err, photoCreated) => {
     if (err) {
       res.locals = createBadResponse(httpCodes.INTERNAL_ERROR, 'Hubo un error interno', {})
       return next(err)
+    }
+    req.locals = {
+      photoId: photoCreated._id
     }
     res.locals = createGoodResponse(httpCodes.CREATED, 'El Photo fue creado correctamente', {photoCreated})
     next()

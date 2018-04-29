@@ -1,7 +1,8 @@
 const path = require('path')
 const multer = require('multer')
 
-const PATH = path.join(__dirname, '../../../../assets/img/photos')
+const basePath = path.join(__dirname, '../../../../..')
+const PATH = path.join(basePath, '/static/img/photos')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -12,6 +13,8 @@ const storage = multer.diskStorage({
   }
 })
 
-let upload = multer({ storage: storage })
+let upload = multer({ storage })
 
 export default upload
+export const getPathFor = id => path.join(PATH, id + '.jpg')
+export const getRawPathFor = pathIncomed => path.join(basePath, pathIncomed)

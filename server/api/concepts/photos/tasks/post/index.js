@@ -1,15 +1,29 @@
-function postTask1 (req, res, next) {
-  next()
+import {getPathFor} from '../../storage/uploadImage'
+const {copyFile, unlink} = require('fs')
+function tweakPhoto (req, res, next) {
+  copyFile(req.file.path, getPathFor(req.locals.photoId), err => {
+    if (err) {
+      console.log(err)
+      throw err
+    }
+    next()
+  })
 }
 
-function postTask2 (req, res, next) {
-  next()
+function removeRawPhoto (req, res, next) {
+  unlink(req.file.path, err => {
+    if (err) {
+      console.log(err)
+      throw err
+    }
+    next()
+  })
 }
 
 const get = []
-const create = []
+const create = [tweakPhoto, removeRawPhoto]
 const update = []
-const retrieve = [postTask1, postTask2]
+const retrieve = []
 const destroy = []
 
 export {get, create, update, retrieve, destroy}

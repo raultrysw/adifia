@@ -1,32 +1,12 @@
 <template>
   <section>
     <h2>Editando {{$route.query.id}}</h2>
-    <form @submit.prevent="submitPhoto">
-      
-        <div>
-          <p>likes</p>
-          <input type="text" v-model="photo.likes" />
-        </div>
-      
-        <div>
-          <p>title</p>
-          <input type="text" v-model="photo.title" />
-        </div>
-      
-        <div>
-          <p>description</p>
-          <input type="text" v-model="photo.description" />
-        </div>
-      
-        <div>
-          <p>location</p>
-          <input type="text" v-model="photo.location" />
-        </div>
-      
-      <div>
-        <p><nuxt-link to="/photos">Volver atras</nuxt-link> <button type="submit"> Actualizar</button></p>
-      </div>
-    </form>
+    <my-form :onSubmit="submitPhoto" :errors="errors" text="Crear la foto" urlCb="/admin/photos" textCb="Volver atas">
+      <my-input type="text" v-model="photo.likes" placeholder="likes de las fotos" />
+      <my-input type="text" v-model="photo.title" placeholder="Título de la foto" />
+      <my-input type="text" v-model="photo.description" placeholder="Descripción de la foto" />
+      <my-input type="text" v-model="photo.location" placeholder="Sitio de la barrera" />
+    </my-form>
   </section>
 </template>
 <script>

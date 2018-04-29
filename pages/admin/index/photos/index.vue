@@ -1,38 +1,34 @@
 <template>
-  <section v-if="loaded">
-    <h2>Listado de miembros</h2>
-    <table>
-      <thead>
-        <th>likes</th><th>title</th><th>description</th><th>location</th>
-      </thead>
-      <tr v-for="(photo, index) in photos" :key="index">
-        <td>{{photo.likes}}</td><td>{{photo.title}}</td><td>{{photo.description}}</td><td>{{photo.location}}</td>
-        <td>
-          <nuxt-link :to="'/photos/' + photo._id">View</nuxt-link> -
-          <nuxt-link :to="'/photos/edit?id=' + photo._id">Edit</nuxt-link>
-          <nuxt-link :to="'/photos/destroy?id=' + photo._id">Eliminar</nuxt-link>
-        </td>
-      </tr>
-    </table>
-    <p><nuxt-link to="/photos/create">Crear un photo</nuxt-link></p>
+  <section class="photos-container">
+    <h2>Listado de fotos</h2>
+    <div class="photos-list" v-if="loaded">
+      <div class="photos-list__photo" v-for="(photo, index) in photos" :key="index">
+        <h1>{{photo.title}}</h1>
+        <img class="photo-list__photo-image" :src="photo.href" />
+        <p>{{photo.likes}} ver en google maps</p>
+        <div class="action-bar">
+          <nuxt-link :to="'/admin/photos/' + photo._id">View</nuxt-link>
+          <nuxt-link :to="'/admin/photos/edit?id=' + photo._id">Edit</nuxt-link>
+          <nuxt-link :to="'/admin/photos/destroy?id=' + photo._id">Eliminar</nuxt-link>
+        </div>
+      </div>
+    </div>
+    <nuxt-link class="fab" to="/admin/photos/create">Crear un photo</nuxt-link>
   </section>
 </template>
 <script>
+import {recoverAllPhotos} from '~/api/photos'
+import {mapMutations, mapState} from 'vuex'
 export default {
-  data () {
-    return {
-      photos: [],
-      loaded: false
+  created () {
+    this.recoverAllPhotos()
+  },
+  computed: {
+    ...mapState(['photos']),
+    loaded () {
+      return this.photos.length > 0
     }
   },
-  created () {
-    const url = '/photos'
-    this.makeRequest({url}, 'get', ({photos}) => {
-      this.photos = photos
-      this.loaded = true
-    }, () => {
-
-    })
-  }
+  methods: {...mapMutations(['submitPhotos']), recoverAllPhotos}
 }
 </script>

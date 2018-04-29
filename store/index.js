@@ -27,6 +27,7 @@ const createStore = () => {
       articles: [],
       events: [],
       user: {},
+      photos: [],
       widths,
       [key]: {
         token: null,
@@ -53,6 +54,9 @@ const createStore = () => {
       updateBounds (state) {
         const innerWidth = window.innerWidth
         state.widthW = innerWidth
+      },
+      submitPhotos (state, photos) {
+        state.photos = photos
       },
       ...articlesStores.mutations,
       ...eventsStores.mutations

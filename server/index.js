@@ -6,6 +6,7 @@ import * as defaults from './default-properties'
 import middlewares from './middlewares'
 
 const mongoose = require('mongoose')
+const path = require('path')
 
 // Config database
 
@@ -22,8 +23,6 @@ for (const functionName in defaults) {
 const app = express()
 
 app.set('port', PORT)
-
-app.use('/api/*', middlewares)
 
 // Import API Routes
 for (const route in routes) {

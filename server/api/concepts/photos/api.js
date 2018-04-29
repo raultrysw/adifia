@@ -19,12 +19,13 @@ import {
   create as postCreateTasks
 } from './tasks/post'
 
+import uploader from './storage/uploadImage'
 const bodyParser = require('body-parser')
 
 let router = new Router()
 
 router.get('/', retrieveAuth, preRetrieveTasks, retrieve, postRetrieveTasks)
-router.post('/', bodyParser.json(), createAuth, preCreateTasks, create, postCreateTasks)
+router.post('/', bodyParser.json(), createAuth, uploader.single('file'), preCreateTasks, create, postCreateTasks)
 router.get('/:id', getAuth, preGetTasks, get, postGetTasks)
 router.put('/:id', bodyParser.json(), updateAuth, preUpdateTasks, update, postUpdateTasks)
 router.delete('/:id', destroyAuth, preDestroyTasks, destroy, postDestroyTasks)

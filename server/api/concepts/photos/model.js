@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
 
 let schema = new mongoose.Schema({
-  
-    likes: {
 
-    },
-  
-    title: {
+  likes: {
 
-    },
-  
-    description: {
+  },
 
-    },
-  
-    location: {
+  title: {
 
-    },
-  
+  },
+
+  description: {
+
+  },
+
+  location: {
+
+  }
+
 })
 
 class PhotoClass {}

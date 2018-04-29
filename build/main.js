@@ -62,11 +62,27 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const errorCodes = {
+  OK: 200,
+  CREATED: 201,
+  INTERNAL_ERROR: 500,
+  UPDATED: 260,
+  NOT_FOUND: 404
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (errorCodes);
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114,22 +130,6 @@ let membersModel = mongoose.model('Member', schema)
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const errorCodes = {
-  OK: 200,
-  CREATED: 201,
-  INTERNAL_ERROR: 500,
-  UPDATED: 260,
-  NOT_FOUND: 404
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (errorCodes);
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -168,13 +168,19 @@ function pipe (theObject, execFN) {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["b"] = recoverUser;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__settings__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__settings__ = __webpack_require__(7);
 
-const jwtSimple = __webpack_require__(23)
+const jwtSimple = __webpack_require__(25)
 
 const decode = (token) => jwtSimple.decode(token, __WEBPACK_IMPORTED_MODULE_0__settings__["f" /* secret */])
 /* unused harmony export decode */
@@ -202,7 +208,7 @@ function recoverUser (req, res, next) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -245,12 +251,6 @@ const userTokenKey = 'jwt-user-token'
 /* harmony export (immutable) */ __webpack_exports__["g"] = userTokenKey;
 
 
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
 
 /***/ }),
 /* 8 */
@@ -354,15 +354,57 @@ let eventsModel = mongoose.model('Event', schema)
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+const mongoose = __webpack_require__(3)
+
+let schema = new mongoose.Schema({
+
+  likes: {
+
+  },
+
+  title: {
+
+  },
+
+  description: {
+
+  },
+
+  location: {
+
+  }
+
+})
+
+class PhotoClass {}
+
+schema.loadClass(PhotoClass)
+
+let photosModel = mongoose.model('Photo', schema)
+
+/* harmony default export */ __webpack_exports__["a"] = (photosModel);
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api___ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings___ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_properties__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__middlewares__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api___ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__settings___ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_properties__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__middlewares__ = __webpack_require__(58);
 
 
 
@@ -371,6 +413,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const mongoose = __webpack_require__(3)
+const path = __webpack_require__(12)
 
 // Config database
 
@@ -388,8 +431,6 @@ const app = __WEBPACK_IMPORTED_MODULE_0_express___default()()
 
 app.set('port', __WEBPACK_IMPORTED_MODULE_3__settings___["d" /* PORT */])
 
-app.use('/api/*', __WEBPACK_IMPORTED_MODULE_5__middlewares__["a" /* default */])
-
 // Import API Routes
 for (const route in __WEBPACK_IMPORTED_MODULE_2__api___["c" /* routes */]) {
   const router = __WEBPACK_IMPORTED_MODULE_2__api___["c" /* routes */][route]
@@ -399,7 +440,7 @@ for (const route in __WEBPACK_IMPORTED_MODULE_2__api___["c" /* routes */]) {
 }
 
 // Import and Set Nuxt.js options
-let config = __webpack_require__(47)
+let config = __webpack_require__(59)
 config.dev = !("development" === 'production')
 
 // Init Nuxt.js
@@ -421,19 +462,19 @@ console.log('Server listening on ' + __WEBPACK_IMPORTED_MODULE_3__settings___["b
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["b"] = responseJson;
 /* harmony export (immutable) */ __webpack_exports__["a"] = logError;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__routes__ = __webpack_require__(16);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__routes__["a"]; });
 
 
@@ -458,13 +499,15 @@ function logError (err, req, res, next) {
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__concepts_members__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__concepts_articles__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__concepts_events__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__concepts_members__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__concepts_articles__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__concepts_events__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__concepts_photos__ = __webpack_require__(45);
+
 
 
 
@@ -472,33 +515,34 @@ function logError (err, req, res, next) {
 /* harmony default export */ __webpack_exports__["a"] = ({
   '/members': __WEBPACK_IMPORTED_MODULE_0__concepts_members__["a" /* default */],
   '/articles': __WEBPACK_IMPORTED_MODULE_1__concepts_articles__["a" /* default */],
-  '/events': __WEBPACK_IMPORTED_MODULE_2__concepts_events__["a" /* default */]
+  '/events': __WEBPACK_IMPORTED_MODULE_2__concepts_events__["a" /* default */],
+  '/photos': __WEBPACK_IMPORTED_MODULE_3__concepts_photos__["a" /* default */]
 });
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(18);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */]);
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_pre__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tasks_post__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_pre__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tasks_post__ = __webpack_require__(27);
 
 
 
@@ -509,7 +553,7 @@ function logError (err, req, res, next) {
 
 
 
-const bodyParser = __webpack_require__(7)
+const bodyParser = __webpack_require__(5)
 
 let router = new __WEBPACK_IMPORTED_MODULE_0_express__["Router"]()
 
@@ -524,7 +568,7 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -533,10 +577,10 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 /* harmony export (immutable) */ __webpack_exports__["c"] = get;
 /* harmony export (immutable) */ __webpack_exports__["e"] = update;
 /* harmony export (immutable) */ __webpack_exports__["b"] = destroy;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prototypes_member__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prototypes_member__ = __webpack_require__(22);
 
 
 
@@ -613,14 +657,14 @@ function destroy (req, res, next) {
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = filterFor;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_pipe_objects__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__filters__);
 
 
@@ -648,13 +692,13 @@ function filterFor ({query, params, user, loginLvl}) {
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -669,7 +713,7 @@ function Member ({name, surname, email, pvLvl, _id}) {
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -691,14 +735,14 @@ const updateAuth = (req, res, next) => next(undefined)
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = logIn;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_codes__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_codes__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(6);
 
 
 
@@ -723,13 +767,13 @@ function logIn (req, res, next) {
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-simple");
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -739,9 +783,9 @@ module.exports = require("jwt-simple");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return retrieve; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
 /* unused harmony export logIn */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_index__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_index__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(0);
 
 
 
@@ -832,7 +876,7 @@ const logIn = []
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -842,9 +886,9 @@ const logIn = []
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return retrieve; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return logIn; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http_codes__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prototypes_credentials__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__http_codes__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prototypes_credentials__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_user_token__ = __webpack_require__(6);
 
 
 
@@ -886,7 +930,7 @@ const logIn = [comparePasswords]
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -901,27 +945,27 @@ function Credentials ({name, surname, email, pvLvl, _id}) {
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(30);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */]);
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_pre__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_post__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_pre__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_post__ = __webpack_require__(36);
 
 
 
@@ -931,7 +975,7 @@ function Credentials ({name, surname, email, pvLvl, _id}) {
 
 
 
-const bodyParser = __webpack_require__(7)
+const bodyParser = __webpack_require__(5)
 
 let router = new __WEBPACK_IMPORTED_MODULE_0_express__["Router"]()
 
@@ -945,7 +989,7 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -954,9 +998,9 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 /* harmony export (immutable) */ __webpack_exports__["c"] = get;
 /* harmony export (immutable) */ __webpack_exports__["e"] = update;
 /* harmony export (immutable) */ __webpack_exports__["b"] = destroy;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(0);
 
 
 
@@ -1028,14 +1072,14 @@ function destroy (req, res, next) {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = filterFor;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_pipe_objects__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(33);
 
 
 
@@ -1069,7 +1113,7 @@ function filterFor ({query, params, user, loginLvl}) {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1088,7 +1132,7 @@ function filterPublishedArticles () {
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1110,7 +1154,7 @@ const updateAuth = (req, res, next) => next(undefined)
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1119,7 +1163,7 @@ const updateAuth = (req, res, next) => next(undefined)
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return update; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return retrieve; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__members_model__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__members_model__ = __webpack_require__(1);
 
 function putAuthor (req, res, next) {
   const {email} = req.user
@@ -1144,7 +1188,7 @@ const destroy = []
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1153,7 +1197,7 @@ const destroy = []
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return update; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return retrieve; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__members_model__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__members_model__ = __webpack_require__(1);
 
 function putArticle (req, res, next) {
   const {email} = req.user
@@ -1184,27 +1228,27 @@ const destroy = []
 
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(38);
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */]);
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_pre__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_post__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_pre__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_post__ = __webpack_require__(44);
 
 
 
@@ -1214,7 +1258,7 @@ const destroy = []
 
 
 
-const bodyParser = __webpack_require__(7)
+const bodyParser = __webpack_require__(5)
 
 let router = new __WEBPACK_IMPORTED_MODULE_0_express__["Router"]()
 
@@ -1228,7 +1272,7 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1237,9 +1281,9 @@ router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destr
 /* harmony export (immutable) */ __webpack_exports__["c"] = get;
 /* harmony export (immutable) */ __webpack_exports__["e"] = update;
 /* harmony export (immutable) */ __webpack_exports__["b"] = destroy;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(0);
 
 
 
@@ -1314,14 +1358,14 @@ function destroy (req, res, next) {
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = filterFor;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_pipe_objects__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(41);
 
 
 
@@ -1352,7 +1396,7 @@ function filterFor ({query, params, user, loginLvl}) {
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1367,7 +1411,7 @@ function sortByDateDesc () {
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1389,7 +1433,7 @@ const updateAuth = (req, res, next) => next(undefined)
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1416,7 +1460,7 @@ const destroy = []
 
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1443,14 +1487,315 @@ const destroy = []
 
 
 /***/ }),
-/* 43 */
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(46);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */]);
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__controllers__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authorizations__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_pre__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tasks_post__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__storage_uploadImage__ = __webpack_require__(53);
+
+
+
+
+// tasks
+
+
+
+
+
+const bodyParser = __webpack_require__(5)
+
+let router = new __WEBPACK_IMPORTED_MODULE_0_express__["Router"]()
+
+router.get('/', __WEBPACK_IMPORTED_MODULE_2__authorizations__["d" /* retrieveAuth */], __WEBPACK_IMPORTED_MODULE_3__tasks_pre__["d" /* retrieve */], __WEBPACK_IMPORTED_MODULE_1__controllers__["d" /* retrieve */], __WEBPACK_IMPORTED_MODULE_4__tasks_post__["d" /* retrieve */])
+router.post('/', bodyParser.json(), __WEBPACK_IMPORTED_MODULE_2__authorizations__["a" /* createAuth */], __WEBPACK_IMPORTED_MODULE_5__storage_uploadImage__["a" /* default */].single('file'), __WEBPACK_IMPORTED_MODULE_3__tasks_pre__["a" /* create */], __WEBPACK_IMPORTED_MODULE_1__controllers__["a" /* create */], __WEBPACK_IMPORTED_MODULE_4__tasks_post__["a" /* create */])
+router.get('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["c" /* getAuth */], __WEBPACK_IMPORTED_MODULE_3__tasks_pre__["c" /* get */], __WEBPACK_IMPORTED_MODULE_1__controllers__["c" /* get */], __WEBPACK_IMPORTED_MODULE_4__tasks_post__["c" /* get */])
+router.put('/:id', bodyParser.json(), __WEBPACK_IMPORTED_MODULE_2__authorizations__["e" /* updateAuth */], __WEBPACK_IMPORTED_MODULE_3__tasks_pre__["e" /* update */], __WEBPACK_IMPORTED_MODULE_1__controllers__["e" /* update */], __WEBPACK_IMPORTED_MODULE_4__tasks_post__["e" /* update */])
+router.delete('/:id', __WEBPACK_IMPORTED_MODULE_2__authorizations__["b" /* destroyAuth */], __WEBPACK_IMPORTED_MODULE_3__tasks_pre__["b" /* destroy */], __WEBPACK_IMPORTED_MODULE_1__controllers__["b" /* destroy */], __WEBPACK_IMPORTED_MODULE_4__tasks_post__["b" /* destroy */])
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["d"] = retrieve;
+/* harmony export (immutable) */ __webpack_exports__["a"] = create;
+/* harmony export (immutable) */ __webpack_exports__["c"] = get;
+/* harmony export (immutable) */ __webpack_exports__["e"] = update;
+/* harmony export (immutable) */ __webpack_exports__["b"] = destroy;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__query_builder__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__model__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_codes__ = __webpack_require__(0);
+
+
+
+
+function retrieve (req, res, next) {
+  const {createGoodResponse, createBadResponse} = req
+  const query = Object(__WEBPACK_IMPORTED_MODULE_0__query_builder__["a" /* filterFor */])(req)
+  query.exec((err, photos) => {
+    if (err) {
+      res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
+      return next(err)
+    }
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'Todos los photos fueron recuperados', {photos})
+    next()
+  })
+}
+
+function create (req, res, next) {
+  console.log(req.file, req.body)
+  const {createGoodResponse, createBadResponse} = req
+  let photo = new __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */](req.body)
+  photo.save((err, photoCreated) => {
+    if (err) {
+      res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
+      return next(err)
+    }
+    req.locals = {
+      photoId: photoCreated._id
+    }
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].CREATED, 'El Photo fue creado correctamente', {photoCreated})
+    next()
+  })
+}
+
+function get (req, res, next) {
+  const {createGoodResponse, createBadResponse} = req
+  __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */].findById(req.params.id, (err, photo) => {
+    if (err) {
+      res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
+      return next(err)
+    }
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'El Photo fue recuperado correctamente', {photo})
+    next()
+  })
+}
+
+function update (req, res, next) {
+  const {createGoodResponse, createBadResponse} = req
+  const $set = req.body
+  __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */].findByIdAndUpdate(req.params.id, {$set}, (err, photo) => {
+    if (err) {
+      res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
+      return next(err)
+    }
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'El Photo fue actualizado correctamente', {photo})
+    next()
+  })
+}
+
+function destroy (req, res, next) {
+  const {createGoodResponse, createBadResponse} = req
+  __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */].findByIdAndRemove(req.params.id, (err, photo) => {
+    if (err) {
+      res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
+      return next(err)
+    }
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'El Photo fue eliminado correctamente', {photo})
+    next()
+  })
+}
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = filterFor;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__model__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_pipe_objects__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__filters__);
+
+
+
+
+function buildQuery ({isJustVocal, isAdmin, notPutEvents, user, requestAll}) {
+  let query = __WEBPACK_IMPORTED_MODULE_0__model__["a" /* default */].aggregate()
+  query.match({})
+
+  let filters = [
+  ]
+
+  return Object(__WEBPACK_IMPORTED_MODULE_1__utils_pipe_objects__["a" /* pipe */])(query, function () {
+    this.through(filters)
+    return this.retrieve()
+  })
+}
+
+function filterFor ({query, params, user, loginLvl}) {
+  const state = {
+  }
+
+  return buildQuery(state)
+}
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const retrieveAuth = (req, res, next) => next(undefined)
+/* harmony export (immutable) */ __webpack_exports__["d"] = retrieveAuth;
+
+const getAuth = (req, res, next) => next(undefined)
+/* harmony export (immutable) */ __webpack_exports__["c"] = getAuth;
+
+const createAuth = (req, res, next) => next(undefined)
+/* harmony export (immutable) */ __webpack_exports__["a"] = createAuth;
+
+const destroyAuth = (req, res, next) => next(undefined)
+/* harmony export (immutable) */ __webpack_exports__["b"] = destroyAuth;
+
+const updateAuth = (req, res, next) => next(undefined)
+/* harmony export (immutable) */ __webpack_exports__["e"] = updateAuth;
+
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return get; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return create; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return update; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return retrieve; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
+function preTask1 (req, res, next) {
+  next()
+}
+
+function preTask2 (req, res, next) {
+  next()
+}
+
+const get = []
+const create = []
+const update = []
+const retrieve = [preTask1, preTask2]
+const destroy = []
+
+
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return get; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return create; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return update; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return retrieve; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return destroy; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__storage_uploadImage__ = __webpack_require__(53);
+
+const {copyFile, unlink} = __webpack_require__(60)
+function tweakPhoto (req, res, next) {
+  copyFile(req.file.path, Object(__WEBPACK_IMPORTED_MODULE_0__storage_uploadImage__["b" /* getPathFor */])(req.locals.photoId), err => {
+    if (err) {
+      console.log(err)
+      throw err
+    }
+    next()
+  })
+}
+
+function removeRawPhoto (req, res, next) {
+  unlink(req.file.path, err => {
+    if (err) {
+      console.log(err)
+      throw err
+    }
+    next()
+  })
+}
+
+const get = []
+const create = [tweakPhoto, removeRawPhoto]
+const update = []
+const retrieve = []
+const destroy = []
+
+
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {const path = __webpack_require__(12)
+const multer = __webpack_require__(54)
+
+const basePath = path.join(__dirname, '../../../../..')
+const PATH = path.join(basePath, '/static/img/photos')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, PATH)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+  }
+})
+
+let upload = multer({ storage })
+
+/* harmony default export */ __webpack_exports__["a"] = (upload);
+const getPathFor = id => path.join(PATH, id + '.jpg')
+/* harmony export (immutable) */ __webpack_exports__["b"] = getPathFor;
+
+const getRawPathFor = pathIncomed => path.join(basePath, pathIncomed)
+/* unused harmony export getRawPathFor */
+
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, "server/api/concepts/photos/storage"))
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+module.exports = require("multer");
+
+/***/ }),
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_pipe_objects__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_response_maker__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_controller_utils__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_response_maker__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_controller_utils__ = __webpack_require__(57);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "pipeObjects", function() { return __WEBPACK_IMPORTED_MODULE_0__utils_pipe_objects__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createBadResponse", function() { return __WEBPACK_IMPORTED_MODULE_1__utils_response_maker__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createGoodResponse", function() { return __WEBPACK_IMPORTED_MODULE_1__utils_response_maker__["b"]; });
@@ -1463,7 +1808,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 44 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1478,7 +1823,7 @@ function createGoodResponse (status, message, items) {
 
 
 /***/ }),
-/* 45 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1495,18 +1840,18 @@ function getMongoDocumentErrors (error) {
 
 
 /***/ }),
-/* 46 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_user_token__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_user_token__ = __webpack_require__(6);
 
 
-/* harmony default export */ __webpack_exports__["a"] = ([__WEBPACK_IMPORTED_MODULE_0__utils_user_token__["b" /* recoverUser */]]);
+/* unused harmony default export */ var _unused_webpack_default_export = ([__WEBPACK_IMPORTED_MODULE_0__utils_user_token__["b" /* recoverUser */]]);
 
 
 /***/ }),
-/* 47 */
+/* 59 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -1552,6 +1897,12 @@ module.exports = {
   }
 }
 
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
 
 /***/ })
 /******/ ]);

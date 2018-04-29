@@ -2,7 +2,7 @@
   <section>
     <p>likes {{photo.likes}}</p><p>title {{photo.title}}</p><p>description {{photo.description}}</p><p>location {{photo.location}}</p>
 
-    <p><nuxt-link to="/photos">Volver atras</nuxt-link></p>
+    <p><nuxt-link to="/admin/photos">Volver atras</nuxt-link></p>
   </section>
 </template>
 <script>
