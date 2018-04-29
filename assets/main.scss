@@ -52,3 +52,24 @@
     box-sizing: border-box;
   }
 }
+
+.event {
+  &__timedate {
+    max-width: 20%;
+    & input {
+      display: block;
+      width: 100%;
+      padding: .2em;
+      margin: 1em;
+    }
+  }
+  &__story {
+    margin-top: 10px;
+    & h3 {
+      text-align: center;
+    }
+    & textarea {
+      width: 100%;
+    }
+  }
+}
