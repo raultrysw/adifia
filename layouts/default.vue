@@ -1,9 +1,9 @@
 <template>
   <div class="app">
+    <adifia-aside />
     <header class="app__header">
       <h2 class="app__title-page">{{currentTitle}}</h2>
     </header>
-    <adifia-aside />
     <main is="nuxt" class="app__main"></main>
   </div>
 </template>
