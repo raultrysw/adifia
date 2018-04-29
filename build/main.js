@@ -1252,7 +1252,12 @@ function retrieve (req, res, next) {
       res.locals = createBadResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].INTERNAL_ERROR, 'Hubo un error interno', {})
       return next(err)
     }
-    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'Todos los events fueron recuperados', {events})
+    let eventsPublished = events.filter(event => {
+      let dateEvent = new Date(event.date + ' ' + event.time)
+      let consumed = Date.now() - dateEvent.getTime() > 0
+      return consumed
+    })
+    res.locals = createGoodResponse(__WEBPACK_IMPORTED_MODULE_2__http_codes__["a" /* default */].OK, 'Todos los events fueron recuperados', {events: eventsPublished})
     next()
   })
 }

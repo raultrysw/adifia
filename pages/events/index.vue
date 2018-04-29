@@ -21,7 +21,7 @@ export default {
   computed: {
     ...mapState(['events']),
     loaded () {
-      return this.events.length > 0
+      return this.events && this.events.length > 0
     }
   },
   methods: {recoverEvents}

@@ -1,6 +1,5 @@
 <template>
   <section v-if="loaded">
-    <h1>{{event.title}} ({{event.date}} - {{event.time}})</h1>
     <p>{{event.description}}</p>
     <p>{{locationParsed.text}}</p>
     <rsw-location :lat="locationParsed.lat" height="20vh" :lng="locationParsed.lng" />
@@ -23,7 +22,7 @@ export default {
         this.events.find(event => event._id === this.$route.params.id)
     },
     title () {
-      return this.event.title
+      return this.event.title + ' (' + this.event.date + ' ' + this.event.time + ')'
     },
     loaded () {
       return this.events.length > 0
