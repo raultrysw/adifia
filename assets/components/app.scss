@@ -29,8 +29,9 @@
   &__main {
     position: fixed;
     top: map-get($map: $main-position, $key: top);
-    left: 16px;
-    right: 16px;
+    left: $global-margin;
+    right: $global-margin;
+    bottom: 0px;
   }
   &__title {
     &-box {

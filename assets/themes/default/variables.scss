@@ -8,4 +8,7 @@ $left-position-header: $aside-width;
 $main-position: (
   top: calc(#{$header-height} + #{$main-margin}),
   left: calc(#{$aside-width} + #{$main-margin})
-)
+);
+
+$election-position: 20%;
+$global-margin: 16px;

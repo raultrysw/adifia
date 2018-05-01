@@ -77,3 +77,26 @@
 table {
   width: 100%;
 }
+
+.election {
+  position: absolute;
+  left: $election-position;
+  &-list {
+    position: absolute;
+    left: 0%;
+    bottom: 0px;
+    top: 0px;
+    width: $election-position;
+  }
+}
+
+.fab {
+  position: fixed;
+  bottom: $global-margin;
+  right: $global-margin;
+  background: tomato;
+  color: white;
+  font-weight: bold;
+  padding: 1em;
+  border-radius: 50%;
+}

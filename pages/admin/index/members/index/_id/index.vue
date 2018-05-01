@@ -1,8 +1,12 @@
 <template>
   <section v-if="loaded">
-    <p>name {{member.name}}</p>
-    <p>surname {{member.surname}}</p>
-    <p>email {{member.email}}</p>
+    <h3>Nombre</h3>
+    <p>{{member.name}}</p>
+    <h3>Apellidos</h3>
+    <p>{{member.surname}}</p>
+    <h3>Correo electrónico</h3>
+    <p>{{member.email}}</p>
+    <h3>Rol del miembro</h3>
     <rols-component @change="changeRol" :active="pvLvl" v-model="pvLvl" />
     <p><nuxt-link to="/admin/members">Volver atras</nuxt-link></p>
     <div>

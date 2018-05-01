@@ -1,15 +1,16 @@
 <template>
   <section v-if="loaded">
-    <h2>Listado de miembros</h2>
-    <div class="member">
-      <nuxt-child />
-    </div>
-    <div class="members" v-for="(member, index) in members" :key="index">
-      <div>
-        <nuxt-link :to="'/admin/members/' + member._id">{{member.name}} - {{member.surname}}</nuxt-link>
+    <nuxt-child class="election" />
+    <div class="election-list">
+      <div v-for="(member, index) in members" :key="index">
+        <div>
+          <nuxt-link :to="'/admin/members/' + member._id">{{member.name}} - {{member.surname}}</nuxt-link>
+        </div>
       </div>
     </div>
-    <p><nuxt-link to="/admin/members/create">Crear un member</nuxt-link></p>
+    <nuxt-link class="fab" to="/admin/members/create">
+      Añadir<font-awesome icon="add" />
+    </nuxt-link>
   </section>
 </template>
 <script>

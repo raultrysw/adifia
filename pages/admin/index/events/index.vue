@@ -1,6 +1,6 @@
 <template>
   <section v-if="loaded">
-    <h2>Listado de miembros</h2>
+    <h2>Listado de eventos</h2>
     <table>
       <thead>
         <th>title</th><th>description</th><th>location</th><th>time</th><th>date</th><th>story</th>
