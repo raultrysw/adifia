@@ -10,23 +10,23 @@ const _7639139e = () => import('../pages/login.vue' /* webpackChunkName: "pages/
 const _51af139b = () => import('../pages/articles/index.vue' /* webpackChunkName: "pages/articles/index" */).then(m => m.default || m)
 const _043e4ff2 = () => import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */).then(m => m.default || m)
 const _1c7dab7c = () => import('../pages/admin/index/photos/index.vue' /* webpackChunkName: "pages/admin/index/photos/index" */).then(m => m.default || m)
-const _1fb83238 = () => import('../pages/admin/index/articles/index.vue' /* webpackChunkName: "pages/admin/index/articles/index" */).then(m => m.default || m)
 const _11f52614 = () => import('../pages/admin/index/events/index.vue' /* webpackChunkName: "pages/admin/index/events/index" */).then(m => m.default || m)
 const _6e850cbf = () => import('../pages/admin/index/events/index/_id/publish.vue' /* webpackChunkName: "pages/admin/index/events/index/_id/publish" */).then(m => m.default || m)
+const _1fb83238 = () => import('../pages/admin/index/articles/index.vue' /* webpackChunkName: "pages/admin/index/articles/index" */).then(m => m.default || m)
 const _0ad24058 = () => import('../pages/admin/index/members/index.vue' /* webpackChunkName: "pages/admin/index/members/index" */).then(m => m.default || m)
+const _2f4e627c = () => import('../pages/admin/index/members/index/_id/index.vue' /* webpackChunkName: "pages/admin/index/members/index/_id/index" */).then(m => m.default || m)
+const _4903742d = () => import('../pages/admin/index/members/index/_id/index/destroy.vue' /* webpackChunkName: "pages/admin/index/members/index/_id/index/destroy" */).then(m => m.default || m)
+const _89e5176c = () => import('../pages/admin/index/members/index/_id/edit.vue' /* webpackChunkName: "pages/admin/index/members/index/_id/edit" */).then(m => m.default || m)
 const _27bfeab8 = () => import('../pages/admin/index/events/edit.vue' /* webpackChunkName: "pages/admin/index/events/edit" */).then(m => m.default || m)
-const _e9a7cc40 = () => import('../pages/admin/index/articles/destroy.vue' /* webpackChunkName: "pages/admin/index/articles/destroy" */).then(m => m.default || m)
-const _6c785224 = () => import('../pages/admin/index/photos/destroy.vue' /* webpackChunkName: "pages/admin/index/photos/destroy" */).then(m => m.default || m)
-const _ca27e27c = () => import('../pages/admin/index/photos/create.vue' /* webpackChunkName: "pages/admin/index/photos/create" */).then(m => m.default || m)
-const _7ff9656a = () => import('../pages/admin/index/members/create.vue' /* webpackChunkName: "pages/admin/index/members/create" */).then(m => m.default || m)
 const _5463e72a = () => import('../pages/admin/index/events/create.vue' /* webpackChunkName: "pages/admin/index/events/create" */).then(m => m.default || m)
-const _40dd1850 = () => import('../pages/admin/index/photos/edit.vue' /* webpackChunkName: "pages/admin/index/photos/edit" */).then(m => m.default || m)
+const _6c785224 = () => import('../pages/admin/index/photos/destroy.vue' /* webpackChunkName: "pages/admin/index/photos/destroy" */).then(m => m.default || m)
+const _7ff9656a = () => import('../pages/admin/index/members/create.vue' /* webpackChunkName: "pages/admin/index/members/create" */).then(m => m.default || m)
 const _3c08f288 = () => import('../pages/admin/index/events/destroy.vue' /* webpackChunkName: "pages/admin/index/events/destroy" */).then(m => m.default || m)
-const _eed81e82 = () => import('../pages/admin/index/members/_id/index.vue' /* webpackChunkName: "pages/admin/index/members/_id/index" */).then(m => m.default || m)
-const _4fa16dac = () => import('../pages/admin/index/members/_id/index/destroy.vue' /* webpackChunkName: "pages/admin/index/members/_id/index/destroy" */).then(m => m.default || m)
+const _40dd1850 = () => import('../pages/admin/index/photos/edit.vue' /* webpackChunkName: "pages/admin/index/photos/edit" */).then(m => m.default || m)
+const _e9a7cc40 = () => import('../pages/admin/index/articles/destroy.vue' /* webpackChunkName: "pages/admin/index/articles/destroy" */).then(m => m.default || m)
+const _ca27e27c = () => import('../pages/admin/index/photos/create.vue' /* webpackChunkName: "pages/admin/index/photos/create" */).then(m => m.default || m)
 const _59385ce4 = () => import('../pages/admin/index/photos/_id.vue' /* webpackChunkName: "pages/admin/index/photos/_id" */).then(m => m.default || m)
 const _aa04c508 = () => import('../pages/admin/index/events/_id.vue' /* webpackChunkName: "pages/admin/index/events/_id" */).then(m => m.default || m)
-const _3c179ead = () => import('../pages/admin/index/members/_id/edit.vue' /* webpackChunkName: "pages/admin/index/members/_id/edit" */).then(m => m.default || m)
 const _223896c0 = () => import('../pages/admin/index/articles/_id/publish.vue' /* webpackChunkName: "pages/admin/index/articles/_id/publish" */).then(m => m.default || m)
 const _e64cd47c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
 const _69eb0437 = () => import('../pages/events/index.vue' /* webpackChunkName: "pages/events/index" */).then(m => m.default || m)
@@ -132,11 +132,6 @@ export function createRouter () {
 					name: "admin-index-photos"
 				},
 				{
-					path: "articles",
-					component: _1fb83238,
-					name: "admin-index-articles"
-				},
-				{
 					path: "events",
 					component: _11f52614,
 					name: "admin-index-events",
@@ -149,9 +144,33 @@ export function createRouter () {
 					]
 				},
 				{
+					path: "articles",
+					component: _1fb83238,
+					name: "admin-index-articles"
+				},
+				{
 					path: "members",
 					component: _0ad24058,
-					name: "admin-index-members"
+					name: "admin-index-members",
+					children: [
+						{
+							path: ":id",
+							component: _2f4e627c,
+							name: "admin-index-members-index-id",
+							children: [
+								{
+									path: "destroy",
+									component: _4903742d,
+									name: "admin-index-members-index-id-index-destroy"
+								}
+							]
+						},
+						{
+							path: ":id/edit",
+							component: _89e5176c,
+							name: "admin-index-members-index-id-edit"
+						}
+					]
 				},
 				{
 					path: "events/edit",
@@ -159,9 +178,9 @@ export function createRouter () {
 					name: "admin-index-events-edit"
 				},
 				{
-					path: "articles/destroy",
-					component: _e9a7cc40,
-					name: "admin-index-articles-destroy"
+					path: "events/create",
+					component: _5463e72a,
+					name: "admin-index-events-create"
 				},
 				{
 					path: "photos/destroy",
@@ -169,24 +188,9 @@ export function createRouter () {
 					name: "admin-index-photos-destroy"
 				},
 				{
-					path: "photos/create",
-					component: _ca27e27c,
-					name: "admin-index-photos-create"
-				},
-				{
 					path: "members/create",
 					component: _7ff9656a,
 					name: "admin-index-members-create"
-				},
-				{
-					path: "events/create",
-					component: _5463e72a,
-					name: "admin-index-events-create"
-				},
-				{
-					path: "photos/edit",
-					component: _40dd1850,
-					name: "admin-index-photos-edit"
 				},
 				{
 					path: "events/destroy",
@@ -194,16 +198,19 @@ export function createRouter () {
 					name: "admin-index-events-destroy"
 				},
 				{
-					path: "members/:id?",
-					component: _eed81e82,
-					name: "admin-index-members-id",
-					children: [
-						{
-							path: "destroy",
-							component: _4fa16dac,
-							name: "admin-index-members-id-index-destroy"
-						}
-					]
+					path: "photos/edit",
+					component: _40dd1850,
+					name: "admin-index-photos-edit"
+				},
+				{
+					path: "articles/destroy",
+					component: _e9a7cc40,
+					name: "admin-index-articles-destroy"
+				},
+				{
+					path: "photos/create",
+					component: _ca27e27c,
+					name: "admin-index-photos-create"
 				},
 				{
 					path: "photos/:id?",
@@ -214,11 +221,6 @@ export function createRouter () {
 					path: "events/:id?",
 					component: _aa04c508,
 					name: "admin-index-events-id"
-				},
-				{
-					path: "members/:id?/edit",
-					component: _3c179ead,
-					name: "admin-index-members-id-edit"
 				},
 				{
 					path: "articles/:id?/publish",

@@ -1,15 +1,15 @@
 <template>
   <section v-if="loaded">
     <h2>Listado de miembros</h2>
-    <div v-for="(member, index) in members" :key="index">
+    <div class="member">
+      <nuxt-child />
+    </div>
+    <div class="members" v-for="(member, index) in members" :key="index">
       <div>
         <nuxt-link :to="'/admin/members/' + member._id">{{member.name}} - {{member.surname}}</nuxt-link>
       </div>
     </div>
     <p><nuxt-link to="/admin/members/create">Crear un member</nuxt-link></p>
-    <div>
-      <nuxt-child />
-    </div>
   </section>
 </template>
 <script>
