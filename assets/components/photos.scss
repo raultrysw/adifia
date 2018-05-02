@@ -3,12 +3,12 @@
   grid-template-columns: auto auto auto auto;
   grid-gap: 1em;
   &__photo {
-    position: relative;
-    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
     &-footer {
-      background: black;
-      position: relative;
-      bottom: 0px;
+      margin-top: auto;
+      background: yellow;
     }
   }
 }

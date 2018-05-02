@@ -1597,6 +1597,8 @@ function retrieve (req, res, next) {
 function create (req, res, next) {
   console.log(req.file, req.body)
   const {createGoodResponse, createBadResponse} = req
+  console.log(req.body)
+
   let photo = new __WEBPACK_IMPORTED_MODULE_1__model__["a" /* default */](req.body)
   photo.save((err, photoCreated) => {
     if (err) {

@@ -24,7 +24,6 @@ export default {
       errors: [],
       photo: {
         file: null,
-        likes: '',
         title: '',
         description: '',
         location: ''
@@ -33,6 +32,7 @@ export default {
   },
   computed: {
     data () {
+      debugger //eslint-disable-line
       let fd = new FormData()
       fd.append('title', this.photo.title)
       fd.append('description', this.photo.description)

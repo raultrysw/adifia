@@ -18,6 +18,8 @@ export function retrieve (req, res, next) {
 export function create (req, res, next) {
   console.log(req.file, req.body)
   const {createGoodResponse, createBadResponse} = req
+  console.log(req.body)
+
   let photo = new Photo(req.body)
   photo.save((err, photoCreated) => {
     if (err) {

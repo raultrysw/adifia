@@ -1,7 +1,7 @@
 <template>
   <label class="input-control">
     <span class="input-control__text">{{text}}</span>
-    <textarea :rows="rows" class="input-control__box" v-if="type === 'textarea'"></textarea>
+    <textarea :rows="rows" @change="sendData" class="input-control__box" v-if="type === 'textarea'"></textarea>
     <input v-else class="input-control__box" @input="sendData" :placeholder="placeholder" :value="value" :type="type || 'text'" />
   </label>
 </template>

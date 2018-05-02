@@ -100,3 +100,8 @@ table {
   padding: 1em;
   border-radius: 50%;
 }
+
+.action-bar {
+  @extend .flex-horizontal;
+  justify-content: space-around;
+}
