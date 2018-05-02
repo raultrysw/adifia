@@ -15,6 +15,6 @@ then
     if [ -e .pushlock ]
     then
         echo "Haciendo push"
-        # git push -u origin master
+        git push -u origin master
     fi
 fi

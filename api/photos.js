@@ -15,7 +15,7 @@ export function createPhoto () {
     { url, data: this.data },
     'post',
     ({ photoCreated }) => {
-      console.log('Se ha creado', photoCreated)
+      this.submitPhoto(new Photo(photoCreated))
       this.$router.push('/admin/photos/' + photoCreated._id)
     },
     error => {

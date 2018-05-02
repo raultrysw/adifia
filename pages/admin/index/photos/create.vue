@@ -15,6 +15,7 @@
 <script>
 import rswLiveImagePreview from '~/components/RSWLivePreviewImage.vue'
 import {createPhoto} from '~/api/photos'
+import {mapMutations} from 'vuex'
 export default {
   components: {rswLiveImagePreview},
   data () {
@@ -41,6 +42,7 @@ export default {
   },
   methods: {
     createPhoto,
+    ...mapMutations(['submitPhoto']),
     updateFile (file) {
       debugger //eslint-disable-line
       this.photo.file = file

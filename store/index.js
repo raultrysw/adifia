@@ -58,6 +58,9 @@ const createStore = () => {
       submitPhotos (state, photos) {
         state.photos = photos
       },
+      submitPhoto (state, photo) {
+        state.photos.push(photo)
+      },
       ...articlesStores.mutations,
       ...eventsStores.mutations
     },

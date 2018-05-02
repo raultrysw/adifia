@@ -2,4 +2,12 @@
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-gap: 1em;
+  &__photo {
+    position: relative;
+    &-footer {
+      background: black;
+      position: relative;
+      bottom: 0px;
+    }
+  }
 }

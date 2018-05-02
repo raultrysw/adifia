@@ -1,30 +1,33 @@
 <template>
-  <section>
-    <p>likes {{photo.likes}}</p><p>title {{photo.title}}</p><p>description {{photo.description}}</p><p>location {{photo.location}}</p>
-
+  <section class="photo" v-if="loaded">
+    <h3 class="photo__title">{{photo.title}}</h3>
+    <div>
+      <img class="photo__image" :src="photo.href" />
+    </div>
+    <p class="photo__description">{{photo.description}}</p>
+    <p class="photo__location">location {{photo.location}}</p>
     <p><nuxt-link to="/admin/photos">Volver atras</nuxt-link></p>
   </section>
 </template>
 <script>
+import {recoverAllPhotos} from '~/api/photos'
+import {mapMutations, mapState} from 'vuex'
 export default {
-  data () {
-    return {
-      photo: {}
-    }
-  },
   created () {
-    this.makeRequest({url: this.photoUrl}, 'get',
-      ({photo}) => {
-        this.photo = photo
-      }, (data) => {
-        console.log(data)
-      }
-    )
+    this.recoverAllPhotos()
   },
   computed: {
+    ...mapState(['photos']),
     photoUrl () {
       return '/photos/' + this.$route.params.id
+    },
+    loaded () {
+      return this.photo !== undefined
+    },
+    photo () {
+      return this.photos.filter(photo => photo._id === this.$route.params.id)[0]
     }
-  }
+  },
+  methods: {...mapMutations(['submitPhotos']), recoverAllPhotos}
 }
 </script>

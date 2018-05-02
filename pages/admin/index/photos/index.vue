@@ -3,13 +3,14 @@
     <h2>Listado de fotos</h2>
     <div class="photos-list" v-if="loaded">
       <div class="photos-list__photo" v-for="(photo, index) in photos" :key="index">
-        <h1>{{photo.title}}</h1>
+        <h1><nuxt-link :to="'/admin/photos/' + photo._id">{{photo.title}}</nuxt-link></h1>
         <img class="photo-list__photo-image" :src="photo.href" />
-        <p>{{photo.likes}} ver en google maps</p>
-        <div class="action-bar">
-          <nuxt-link :to="'/admin/photos/' + photo._id">View</nuxt-link>
-          <nuxt-link :to="'/admin/photos/edit?id=' + photo._id">Edit</nuxt-link>
-          <nuxt-link :to="'/admin/photos/destroy?id=' + photo._id">Eliminar</nuxt-link>
+        <div class="photo-list__photo-footer">
+          <p>{{photo.likes}} ver en google maps</p>
+          <div class="action-bar">
+            <nuxt-link :to="'/admin/photos/edit?id=' + photo._id">Edit</nuxt-link>
+            <nuxt-link :to="'/admin/photos/destroy?id=' + photo._id">Eliminar</nuxt-link>
+          </div>
         </div>
       </div>
     </div>
