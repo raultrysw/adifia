@@ -4,8 +4,8 @@
         <li v-for="(error, index) in errors" :key="index">{{error}}</li>
       </ul>
       <slot />
-      <div>
-        <p><nuxt-link :to="urlCb">{{textCb}}</nuxt-link> <button type="button" @click="dispatchSubmit"> {{text}}</button></p>
+      <div >
+        <p><nuxt-link v-if="urlCb" :to="urlCb">{{textCb}}</nuxt-link> <button type="button" @click="dispatchSubmit"> {{text}}</button></p>
       </div>
     </form>
 </template>

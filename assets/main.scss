@@ -105,3 +105,31 @@ table {
   @extend .flex-horizontal;
   justify-content: space-around;
 }
+
+.modal {
+  &.overlayed {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: white;
+    width: 100%;
+    height: 100vh;
+    z-index: 200;
+  }
+  &.faded {
+    background: rgba(0,0,0,.75);
+  }
+  &__close-link {
+    @extend .fab;
+    background: grey;
+    color: white;
+    top: $global-margin;
+    right: $global-margin;
+    bottom: initial;
+  }
+  &__container {
+    background: white;
+    max-width: 75%;
+    margin: 2em auto;
+  }
+}

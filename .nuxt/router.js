@@ -3,11 +3,15 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+const _69eb0437 = () => import('../pages/events/index.vue' /* webpackChunkName: "pages/events/index" */).then(m => m.default || m)
 const _c579659a = () => import('../pages/signup.vue' /* webpackChunkName: "pages/signup" */).then(m => m.default || m)
 const _71210ac4 = () => import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */).then(m => m.default || m)
 const _430f6669 = () => import('../pages/profile/articles/_id/publish.vue' /* webpackChunkName: "pages/profile/articles/_id/publish" */).then(m => m.default || m)
 const _7639139e = () => import('../pages/login.vue' /* webpackChunkName: "pages/login" */).then(m => m.default || m)
 const _51af139b = () => import('../pages/articles/index.vue' /* webpackChunkName: "pages/articles/index" */).then(m => m.default || m)
+const _7473899f = () => import('../pages/photos/index.vue' /* webpackChunkName: "pages/photos/index" */).then(m => m.default || m)
+const _70f86bc8 = () => import('../pages/photos/index/create.vue' /* webpackChunkName: "pages/photos/index/create" */).then(m => m.default || m)
+const _e64cd47c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
 const _043e4ff2 = () => import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */).then(m => m.default || m)
 const _1c7dab7c = () => import('../pages/admin/index/photos/index.vue' /* webpackChunkName: "pages/admin/index/photos/index" */).then(m => m.default || m)
 const _11f52614 = () => import('../pages/admin/index/events/index.vue' /* webpackChunkName: "pages/admin/index/events/index" */).then(m => m.default || m)
@@ -28,11 +32,9 @@ const _ca27e27c = () => import('../pages/admin/index/photos/create.vue' /* webpa
 const _59385ce4 = () => import('../pages/admin/index/photos/_id.vue' /* webpackChunkName: "pages/admin/index/photos/_id" */).then(m => m.default || m)
 const _aa04c508 = () => import('../pages/admin/index/events/_id.vue' /* webpackChunkName: "pages/admin/index/events/_id" */).then(m => m.default || m)
 const _223896c0 = () => import('../pages/admin/index/articles/_id/publish.vue' /* webpackChunkName: "pages/admin/index/articles/_id/publish" */).then(m => m.default || m)
-const _e64cd47c = () => import('../pages/about.vue' /* webpackChunkName: "pages/about" */).then(m => m.default || m)
-const _69eb0437 = () => import('../pages/events/index.vue' /* webpackChunkName: "pages/events/index" */).then(m => m.default || m)
 const _0be7aa83 = () => import('../pages/articles/create.vue' /* webpackChunkName: "pages/articles/create" */).then(m => m.default || m)
-const _6d4ee906 = () => import('../pages/articles/_id/index.vue' /* webpackChunkName: "pages/articles/_id/index" */).then(m => m.default || m)
 const _dbeaaf42 = () => import('../pages/events/_id.vue' /* webpackChunkName: "pages/events/_id" */).then(m => m.default || m)
+const _6d4ee906 = () => import('../pages/articles/_id/index.vue' /* webpackChunkName: "pages/articles/_id/index" */).then(m => m.default || m)
 const _f4edfcf4 = () => import('../pages/articles/_id/edit.vue' /* webpackChunkName: "pages/articles/_id/edit" */).then(m => m.default || m)
 const _a6dd1ef2 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
@@ -95,6 +97,11 @@ export function createRouter () {
     scrollBehavior,
     routes: [
 		{
+			path: "/events",
+			component: _69eb0437,
+			name: "events"
+		},
+		{
 			path: "/signup",
 			component: _c579659a,
 			name: "signup"
@@ -120,6 +127,23 @@ export function createRouter () {
 			path: "/articles",
 			component: _51af139b,
 			name: "articles"
+		},
+		{
+			path: "/photos",
+			component: _7473899f,
+			name: "photos",
+			children: [
+				{
+					path: "create",
+					component: _70f86bc8,
+					name: "photos-index-create"
+				}
+			]
+		},
+		{
+			path: "/about",
+			component: _e64cd47c,
+			name: "about"
 		},
 		{
 			path: "/admin",
@@ -230,29 +254,19 @@ export function createRouter () {
 			]
 		},
 		{
-			path: "/about",
-			component: _e64cd47c,
-			name: "about"
-		},
-		{
-			path: "/events",
-			component: _69eb0437,
-			name: "events"
-		},
-		{
 			path: "/articles/create",
 			component: _0be7aa83,
 			name: "articles-create"
 		},
 		{
-			path: "/articles/:id",
-			component: _6d4ee906,
-			name: "articles-id"
-		},
-		{
 			path: "/events/:id",
 			component: _dbeaaf42,
 			name: "events-id"
+		},
+		{
+			path: "/articles/:id",
+			component: _6d4ee906,
+			name: "articles-id"
 		},
 		{
 			path: "/articles/:id/edit",
