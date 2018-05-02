@@ -4,6 +4,7 @@
   grid-gap: 1em;
   &__photo {
     position: relative;
+    max-width: 30%;
     &-footer {
       background: black;
       position: relative;

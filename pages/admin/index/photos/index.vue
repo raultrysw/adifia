@@ -6,7 +6,7 @@
         <h1><nuxt-link :to="'/admin/photos/' + photo._id">{{photo.title}}</nuxt-link></h1>
         <img class="photo-list__photo-image" :src="photo.href" />
         <div class="photo-list__photo-footer">
-          <p>{{photo.likes}} ver en google maps</p>
+          <p><a :href="linkToGoogleMaps(photo)">Ver en google maps</a></p>
           <div class="action-bar">
             <nuxt-link :to="'/admin/photos/edit?id=' + photo._id">Edit</nuxt-link>
             <nuxt-link :to="'/admin/photos/destroy?id=' + photo._id">Eliminar</nuxt-link>
@@ -20,6 +20,11 @@
 <script>
 import {recoverAllPhotos} from '~/api/photos'
 import {mapMutations, mapState} from 'vuex'
+
+function linkToGoogleMaps (photo) {
+  const [lat, lng] = photo.location.split(':')
+  return 'https://maps.google.com/?q=' + lat + ',' + lng
+}
 export default {
   created () {
     this.recoverAllPhotos()
@@ -29,7 +34,8 @@ export default {
     loaded () {
       return this.photos.length > 0
     }
+
   },
-  methods: {...mapMutations(['submitPhotos']), recoverAllPhotos}
+  methods: {...mapMutations(['submitPhotos']), recoverAllPhotos, linkToGoogleMaps}
 }
 </script>

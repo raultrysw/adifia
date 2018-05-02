@@ -5,7 +5,7 @@
       <img class="photo__image" :src="photo.href" />
     </div>
     <p class="photo__description">{{photo.description}}</p>
-    <p class="photo__location">location {{photo.location}}</p>
+    <p><a :href="linkToGoogleMaps">Ver en google maps</a></p>
     <p><nuxt-link to="/admin/photos">Volver atras</nuxt-link></p>
   </section>
 </template>
@@ -26,6 +26,10 @@ export default {
     },
     photo () {
       return this.photos.filter(photo => photo._id === this.$route.params.id)[0]
+    },
+    linkToGoogleMaps () {
+      const [lat, lng] = this.photo.location.split(':')
+      return 'https://maps.google.com/?q=' + lat + ',' + lng
     }
   },
   methods: {...mapMutations(['submitPhotos']), recoverAllPhotos}
