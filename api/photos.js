@@ -3,6 +3,8 @@ import * as articleURLS from './url-builders/photos'
 import Photo from '~/prototypes/photo.js'
 
 export function recoverAllPhotos () {
+  debugger //eslint-disable-line
+
   const url = articleURLS.linkForPhotos()
   this.makeRequest({ url }, 'get', ({ photos }) => {
     let photosRecovered = photos.map(photo => new Photo(photo))
@@ -22,4 +24,12 @@ export function createPhoto () {
       console.log(error)
     }
   )
+}
+export function removePhoto () {
+  if (this.confirmation !== this.userConfirmation) return
+  this.makeRequest({ url: this.photoUrl }, 'delete', () => {
+    this.$router.push('/admin/photos')
+  }, data => {
+    console.log(data)
+  })
 }
