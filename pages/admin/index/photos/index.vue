@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <nuxt-link class="fab" to="/admin/photos/create">Crear un photo</nuxt-link>
+    <nuxt-link class="fab" to="/admin/photos/create"><font-awesome icon="plus" /></nuxt-link>
   </section>
 </template>
 <script>

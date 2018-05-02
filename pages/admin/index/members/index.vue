@@ -9,7 +9,7 @@
       </div>
     </div>
     <nuxt-link class="fab" to="/admin/members/create">
-      Añadir<font-awesome icon="add" />
+      <font-awesome icon="plus" />
     </nuxt-link>
   </section>
 </template>
